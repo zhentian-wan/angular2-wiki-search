@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Http, Jsonp, URLSearchParams} from "@angular/http";
+import {Subject, Observable} from 'rxjs';
 
 @Injectable()
 export class WikiSearchService {
@@ -9,7 +10,14 @@ export class WikiSearchService {
 
   }
 
-  search(term: string){
+  search(term$: Observable<string>, dtime=400){
+    return term$
+      .debounceTime(dtime)
+      .distinctUntilChanged()
+      .switchMap(term => this.rawsearch(term));
+  }
+
+  rawsearch(term: string){
     let search = new URLSearchParams();
     search.set('action', 'opensearch');
     search.set('search', term);
