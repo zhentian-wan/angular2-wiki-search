@@ -16,7 +16,7 @@ export class SearchBarComponent implements OnInit {
     this.wikiSearch.search(this.term$)
       .subscribe( res => {
         this.items = res;
-        this.searchResult.emit(this.items);
+        this.searchResult.next(this.items);
       });
 
   }

@@ -9,7 +9,7 @@ import {WikiSearchService} from "../shared/wiki-search.service";
 })
 export class ResultListComponent implements OnInit {
 
-  @Input('input') searchResult: string;
+  @Input('input') searchResult: Array<string>;
   constructor() {
 
   }
