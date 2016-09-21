@@ -8,6 +8,7 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
 import { ResultListComponent } from './result-list/result-list.component';
 import {SharedServiceModule} from "./shared/index";
 import {CommonModule} from "@angular/common";
+import {API_URL} from "./shared/constance.service";
 
 @NgModule({
   declarations: [
@@ -23,7 +24,12 @@ import {CommonModule} from "@angular/common";
     JsonpModule,
     SharedServiceModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    {
+      provide: API_URL,
+      useValue: `https://en.wikipedia.org/w/api.php?callback=JSONP_CALLBACK`
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

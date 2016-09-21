@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
+import {Injectable, Inject} from '@angular/core';
 import {Http, Jsonp, URLSearchParams} from "@angular/http";
 import {Subject, Observable} from 'rxjs';
+import {API_URL} from "./constance.service";
 
 @Injectable()
 export class WikiSearchService {
 
-  apiUrl: string = `https://en.wikipedia.org/w/api.php?callback=JSONP_CALLBACK`;
-  constructor(private jsonp: Jsonp) {
+  constructor(private jsonp: Jsonp, @Inject(API_URL) private apiUrl) {
 
   }
 
@@ -16,7 +16,7 @@ export class WikiSearchService {
       .distinctUntilChanged()
       .switchMap(term => this.rawsearch(term));
   }
-
+ 
   rawsearch(term: string){
     let search = new URLSearchParams();
     search.set('action', 'opensearch');
