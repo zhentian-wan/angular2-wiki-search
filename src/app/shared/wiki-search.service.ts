@@ -16,7 +16,7 @@ export class WikiSearchService {
       .distinctUntilChanged()
       .switchMap(term => this.rawsearch(term));
   }
- 
+
   rawsearch(term: string){
     let search = new URLSearchParams();
     search.set('action', 'opensearch');
