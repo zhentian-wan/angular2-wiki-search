@@ -9,6 +9,10 @@ import { ResultListComponent } from './result-list/result-list.component';
 import {SharedServiceModule} from "./shared/index";
 import {CommonModule} from "@angular/common";
 import {API_URL} from "./shared/constance.service";
+import { MdButtonModule } from '@angular2-material/button';
+import {MdInputModule} from "@angular2-material/input";
+import {MdListModule} from "@angular2-material/list";
+import {MdToolbarModule} from "@angular2-material/toolbar";
 
 @NgModule({
   declarations: [
@@ -17,6 +21,10 @@ import {API_URL} from "./shared/constance.service";
     ResultListComponent
   ],
   imports: [
+    MdButtonModule.forRoot(),
+    MdInputModule.forRoot(),
+    MdToolbarModule.forRoot(),
+    MdListModule.forRoot(),
     BrowserModule,
     FormsModule,
     CommonModule,
