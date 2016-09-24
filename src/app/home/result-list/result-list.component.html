@@ -1,0 +1,15 @@
+<div>
+  <md-list>
+    <md-list-item *ngFor="let item of searchResult">
+      {{item}}
+    </md-list-item>
+    <md-list-item *ngIf="searchResult?.length === 0">No result...</md-list-item>
+    <md-list-item *ngIf="!searchResult">List here...</md-list-item>
+  </md-list>
+
+  <button md-button md-raised-button color="primary"
+          *ngIf="searchResult?.length > 0"
+          (click)="searchResult.reverse()">
+    Reverse
+  </button>
+</div>
