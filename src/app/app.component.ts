@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import {Subject} from "rxjs";
-
 
 @Component({
   selector: 'app-root',
@@ -9,5 +7,4 @@ import {Subject} from "rxjs";
 })
 export class AppComponent {
   title = 'app works!';
-  term: Subject<string>;
 }
