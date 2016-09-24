@@ -16,13 +16,15 @@ import {MdToolbarModule} from "@angular2-material/toolbar";
 import { HomeComponent } from './home/home.component';
 
 import appRoutes from './app.routes';
+import { ContactComponent } from './contact/contact.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchBarComponent,
     ResultListComponent,
-    HomeComponent
+    HomeComponent,
+    ContactComponent
   ],
   imports: [
     MdButtonModule.forRoot(),
