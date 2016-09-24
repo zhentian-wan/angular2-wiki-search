@@ -1,0 +1,5 @@
+<md-input type="text"
+          (input)="term$.next($event.target.value)"
+          (keyup.enter)="clean(inp)"
+          placeholder="Do Search" #inp>
+</md-input>
