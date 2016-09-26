@@ -22,5 +22,6 @@ export class StarWarsService {
         .map( (hero:any) => Object.assign({}, hero, {
           image: `${this.starwarUrl}/${hero.image}`
         }))
+
     }
 }

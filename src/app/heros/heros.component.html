@@ -1,3 +1,4 @@
+Search Index: <input type="text" placeholder="Search" (keyup.enter)="getHeroByIndex(inpRef.value)" #inpRef>
 <ul>
   <li *ngFor="let hero of heros | async">
     <a [routerLink]="hero.id"
