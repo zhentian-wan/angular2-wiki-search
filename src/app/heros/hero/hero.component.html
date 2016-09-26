@@ -1,3 +1,4 @@
-<p>
-  hero No {{id | async}}
-</p>
+<div>
+  <h2>{{(hero | async)?.name}}</h2>
+  <img src="{{(hero | async)?.image}}" alt="">
+</div>

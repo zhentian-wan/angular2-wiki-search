@@ -5,7 +5,7 @@ import {HttpModule, JsonpModule} from '@angular/http';
 
 import { AppComponent } from './app.component';
 import {SharedServiceModule} from "./shared/index";
-import {API_URL, STARWARS_PEOPLE_URL} from "./shared/constance.service";
+import {API_URL, STARWARS_BASE_URL} from "./shared/constance.service";
 
 import appRoutes from './app.routes';
 import {APP_BASE_HREF} from "@angular/common";
@@ -29,8 +29,8 @@ import {APP_BASE_HREF} from "@angular/common";
       useValue: `https://en.wikipedia.org/w/api.php?callback=JSONP_CALLBACK`
     },
     {
-      provide: STARWARS_PEOPLE_URL,
-      useValue: `https://starwars-json-server-ewtdxbyfdz.now.sh/people`
+      provide: STARWARS_BASE_URL,
+      useValue: `https://starwars-json-server-ewtdxbyfdz.now.sh`
     }
   ],
   bootstrap: [AppComponent]
