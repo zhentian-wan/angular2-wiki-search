@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
+import {StarWarsService} from "../heros.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-hero',
@@ -8,9 +10,14 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class HeroComponent implements OnInit {
 
-  id;
-  constructor(private router: ActivatedRoute) {
-    this.id = router.params.map((p:any) => p.id);
+  hero: Observable<Object>;
+  constructor(private router: ActivatedRoute, private starwarService: StarWarsService) {
+    this.hero = router.params.map((p:any) => p.id)
+      .switchMap( id => this.starwarService.getPersonDetail(id))
+      .startWith({
+        name: 'Loading...',
+        image: ''
+      })
   }
 
   ngOnInit() {
