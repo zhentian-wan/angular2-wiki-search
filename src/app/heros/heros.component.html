@@ -1,8 +1,8 @@
 <ul>
-  <li>
-    <a [routerLink]="'1'"
+  <li *ngFor="let hero of heros | async">
+    <a [routerLink]="hero.id"
        routerLinkActive="active"
-       [routerLinkActiveOptions]="{exact: true}">Hero 1</a>
+       [routerLinkActiveOptions]="{exact: true}">{{hero.name}}</a>
   </li>
 </ul>
 
