@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Input} from "@angular/core/src/metadata/directives";
-import {WikiSearchService} from "../shared/wiki-search.service";
+import {WikiSearchService} from "../../shared/wiki-search.service";
 
 @Component({
   selector: 'result-list',
