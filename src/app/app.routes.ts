@@ -1,8 +1,14 @@
 import {RouterModule} from "@angular/router";
+import {NotFoundComponent} from "./shared-components/not-found/not-found.component";
+
+const indexRoute = {path: '', loadChildren: 'app/home/home.module'};
+const fallbackRoute = {path: '**', component: NotFoundComponent};
 const routes = [
-  {path: '', loadChildren: 'app/home/home.module', name: 'Home'},
+  {path: 'home', loadChildren: 'app/home/home.module', name: 'Home'},
   {path: 'heros', loadChildren: 'app/heros/heros.module', name: 'Heros'},
   {path: 'contact', loadChildren: 'app/contact/contact.module', name: 'Contact'},
+  indexRoute,
+  fallbackRoute
 ];
 
 export default RouterModule.forRoot(routes);

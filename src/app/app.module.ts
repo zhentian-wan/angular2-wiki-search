@@ -9,10 +9,12 @@ import {API_URL, STARWARS_BASE_URL} from "./shared/constance.service";
 
 import appRoutes from './app.routes';
 import {APP_BASE_HREF} from "@angular/common";
+import { NotFoundComponent } from './shared-components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NotFoundComponent
   ],
   imports: [
     appRoutes,
