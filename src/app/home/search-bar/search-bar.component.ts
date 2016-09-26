@@ -1,6 +1,6 @@
 import {Component, OnInit, EventEmitter, Output} from '@angular/core';
 import {Subject, Observable} from 'rxjs';
-import {WikiSearchService} from "../shared";
+import {WikiSearchService} from "../../shared";
 
 @Component({
   selector: 'search-bar',
