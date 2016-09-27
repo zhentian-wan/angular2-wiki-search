@@ -27,12 +27,20 @@
     <fieldset ngModelGroup="login">
       <legend>Login:</legend>
 
-      Username: <input type="text" name="username" ngModel required>
-      Password: <input type="password" name="password" ngModel required>
+      Username: <input type="text" name="username" #usernameRef="ngModel" ngModel required>
+      Password: <input type="password" name="password" #passwordRef="ngModel" ngModel required>
 
     </fieldset>
   </form>
+  <div class="error-messages" *ngIf="!formRef2.valid">
+    <span class="error-message" *ngIf="!usernameRef.untouched && usernameRef.errors?.required">Username is required</span>
+    <span class="error-message" *ngIf="!passwordRef.untouched && passwordRef.errors?.required">password is required</span>
+  </div>
   <pre>
+    username pristine: {{usernameRef.pristine}}
+    username dirty: {{usernameRef.dirty}}
+    username untouched: {{usernameRef.untouched}}
+    username touched: {{usernameRef.touched}}
     form value: {{formRef2.value | json}}
     form valid: {{formRef2.valid | json}}
   </pre>
