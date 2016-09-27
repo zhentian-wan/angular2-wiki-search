@@ -6,7 +6,10 @@ input.ng-invalid.ng-dirty.ng-touched{
 }
 .error-messages{
   float: right;
-  .error-message{
-    color: red;
-  }
+}
+.error-message{
+   color: darkred;
+ }
+.success-message{
+  color: green;
 }

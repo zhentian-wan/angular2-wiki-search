@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-message',
@@ -7,14 +8,40 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MessageComponent implements OnInit {
 
-  message = "Hello";
+  @ViewChild('myForm3') form;
 
-  constructor() { }
+  message = "Hello";
+  answer: string;
+
+  constructor() {
+  }
 
   ngOnInit() {
   }
 
-  onSubmit(formValue){
+  onSubmit(formValue) {
     console.log("formValue", JSON.stringify(formValue, null, 2))
+  }
+
+  ngAfterViewInit() {
+    this.form.valueChanges
+      .subscribe((res) => console.table(res));
+
+    this.form.statusChanges
+      .subscribe((res) => console.log(res));
+
+    Observable
+      .combineLatest(
+        this.form.valueChanges,
+        this.form.statusChanges,
+        (value, status) => ({value, status})
+      )
+      .filter( ({status}) => {
+        return status === "VALID";
+      })
+      .subscribe( val => {
+        this.answer = "You are right!";
+      })
+
   }
 }
