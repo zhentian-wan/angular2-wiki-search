@@ -7,6 +7,7 @@ const routes = [
   {path: 'home', loadChildren: 'app/home/home.module', name: 'Home'},
   {path: 'heros', loadChildren: 'app/heros/heros.module', name: 'Heros'},
   {path: 'contact', loadChildren: 'app/contact/contact.module', name: 'Contact'},
+  {path: 'message', loadChildren: 'app/message/message.module', name: 'Message'},
   indexRoute,
   fallbackRoute
 ];
