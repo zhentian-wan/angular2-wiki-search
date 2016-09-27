@@ -1,0 +1,15 @@
+<section>
+  Min length & required: <input type="text" [(ngModel)]="message" #messageRef="ngModel" required minlength="5">
+  <pre>
+    Errors: {{messageRef.errors | json}}
+    Valid: {{messageRef.valid}}
+  </pre>
+  <div *ngIf="!messageRef.valid">
+    <div *ngIf="messageRef.errors?.required">This field is required</div>
+    <div *ngIf="messageRef.errors?.minlength">Min length is {{messageRef.errors?.minlength.requiredLength}}, but now only {{messageRef.errors?.minlength.actualLength}}</div>
+  </div>
+  <br />
+  <hr/>
+
+  <button md-button class="md-raised">Add</button>
+</section>

@@ -10,17 +10,15 @@ import {Observable} from "rxjs";
 })
 export class HeroComponent implements OnInit {
 
-  hero: Observable<Object>;
+  hero: Observable<any>;
   constructor(private router: ActivatedRoute, private starwarService: StarWarsService) {
-    this.hero = router.params.map((p:any) => p.id)
-      .switchMap( id => this.starwarService.getPersonDetail(id))
-      .startWith({
-        name: 'Loading...',
-        image: ''
-      })
+
   }
 
   ngOnInit() {
+    this.hero = this.router.params
+      .map((p:any) => p.id)
+      .switchMap( id => this.starwarService.getPersonDetail(id));
   }
 
 }
