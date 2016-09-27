@@ -6,10 +6,34 @@
   </pre>
   <div *ngIf="!messageRef.valid">
     <div *ngIf="messageRef.errors?.required">This field is required</div>
-    <div *ngIf="messageRef.errors?.minlength">Min length is {{messageRef.errors?.minlength.requiredLength}}, but now only {{messageRef.errors?.minlength.actualLength}}</div>
+    <div *ngIf="messageRef.errors?.minlength">Min length is {{messageRef.errors?.minlength.requiredLength}}, but now
+      only {{messageRef.errors?.minlength.actualLength}}
+    </div>
   </div>
-  <br />
+  <br/>
   <hr/>
 
-  <button md-button class="md-raised">Add</button>
+  <form action="" name="myForm" #formRef="ngForm" (ngSubmit)="onSubmit(formRef.value)">
+    Firstname: <input type="text" name="firstName" ngModel required>
+    <button [disabled]="!formRef.valid">Submit</button>
+  </form>
+  <pre>
+    form value: {{formRef.value | json}}
+    form valid: {{formRef.valid | json}}
+  </pre>
+  <br>
+  <hr>
+  <form name="myForm2" #formRef2="ngForm" (ngSubmit)="onSubmit(formRef2.value)">
+    <fieldset ngModelGroup="login">
+      <legend>Login:</legend>
+
+      Username: <input type="text" name="username" ngModel required>
+      Password: <input type="password" name="password" ngModel requried>
+
+    </fieldset>
+  </form>
+  <pre>
+    form value: {{formRef2.value | json}}
+    form valid: {{formRef2.valid | json}}
+  </pre>
 </section>
