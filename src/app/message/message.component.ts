@@ -14,4 +14,7 @@ export class MessageComponent implements OnInit {
   ngOnInit() {
   }
 
+  onSubmit(formValue){
+    console.log("formValue", JSON.stringify(formValue, null, 2))
+  }
 }
