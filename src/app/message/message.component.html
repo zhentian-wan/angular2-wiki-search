@@ -44,4 +44,27 @@
     form value: {{formRef2.value | json}}
     form valid: {{formRef2.valid | json}}
   </pre>
+  <br>
+  <hr>
+
+
+  <!--
+
+    Learn @ViewChld()
+    valueChanges,
+    statusChanges,
+    Observable.combineLates
+
+  -->
+  <form #myForm3="ngForm" name="myForm3">
+    <input type="text" #techRef="ngModel" ngModel required placeholder="Type Angular2..." name="tech" pattern="Angular2">
+    <span *ngIf="techRef.valid" class="success-message">{{answer}}</span>
+  </form>
+  <div class="error-messages" *ngIf="!myForm3.valid">
+    <span class="error-message" *ngIf="techRef.errors?.pattern">{{techRef.errors?.pattern.requiredPattern}} only</span>
+    <span class="error-message" *ngIf="techRef.errors?.required">Requried</span>
+  </div>
+  <pre>
+    Input: {{techRef.errors | json}}
+  </pre>
 </section>
