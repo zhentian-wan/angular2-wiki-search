@@ -12,11 +12,18 @@ export class MessageComponent implements OnInit {
 
   message = "Hello";
   answer: string;
+  locations: Array<string>;
 
   constructor() {
   }
 
   ngOnInit() {
+    this.locations = [
+      'China',
+      'Finland',
+      'Norway',
+      'Japan'
+    ];
   }
 
   onSubmit(formValue) {
