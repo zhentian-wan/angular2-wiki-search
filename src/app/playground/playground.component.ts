@@ -11,6 +11,8 @@ export class PlaygroundComponent implements OnInit, OnDestroy {
 
   @ViewChild('right') right;
   @ViewChild('left') left;
+  @ViewChild('up') up;
+  @ViewChild('down') down;
 
   position;
   ballSub$: Subscription;
@@ -25,12 +27,18 @@ export class PlaygroundComponent implements OnInit, OnDestroy {
   ngOnInit() {
     const rightBtn = this.right.nativeElement;
     const leftBtn = this.left.nativeElement;
+    const upBtn = this.up.nativeElement;
+    const downBtn = this.down.nativeElement;
     const rightClick$ = Observable.fromEvent(rightBtn, 'click')
-      .map(event => 10);
+      .map(event => ({x: 10, y: 0}));
     const leftClick$ = Observable.fromEvent(leftBtn, 'click')
-      .map(event => -10);
+      .map(event => ({x: -10, y: 0}));
+    const upClick$ = Observable.fromEvent(upBtn, 'click')
+      .map(event => ({x: 0, y: -10}));
+    const downClick$ = Observable.fromEvent(downBtn, 'click')
+      .map(event => ({x: 0, y: 10}));
 
-    this.ballSub$ = Observable.merge(rightClick$, leftClick$)
+    this.ballSub$ = Observable.merge(rightClick$, leftClick$, upClick$, downClick$)
       .startWith({
         x: 100,
         y: 100
@@ -39,8 +47,8 @@ export class PlaygroundComponent implements OnInit, OnDestroy {
         // acc: position
         // curr: 10 / -10
         return {
-          y: acc.y,
-          x: acc.x + curr
+          y: acc.y + curr.y,
+          x: acc.x + curr.x
         }
       })
       .subscribe(
