@@ -51,9 +51,9 @@
   <!--
 
     Learn @ViewChld()
-    valueChanges,
-    statusChanges,
-    Observable.combineLates
+    valueChanges: show the value,
+    statusChanges: show VALIDE or INVALIDE,
+    Observable.combineLatest
 
   -->
   <form #myForm3="ngForm" name="myForm3">
@@ -66,5 +66,25 @@
   </div>
   <pre>
     Input: {{techRef.errors | json}}
+  </pre>
+
+  <br>
+  <hr>
+
+  <!-- Radio button-->
+  <form action="" name="myFom4" #myForm4="ngForm">
+    <div *ngFor="let location of locations">
+      <input type="radio"
+             name="location"
+             ngModel
+             [value]="location"
+             [id]="location"
+             required
+      >
+      <label [attr.for]="location">{{location}}</label>
+    </div>
+  </form>
+  <pre>
+    {{myForm4.value | json}}
   </pre>
 </section>

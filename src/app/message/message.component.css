@@ -13,3 +13,6 @@ input.ng-invalid.ng-dirty.ng-touched{
 .success-message{
   color: green;
 }
+input.ng-invalid + label:after {
+  content: '<--Requried to selet one'
+}
