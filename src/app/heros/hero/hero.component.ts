@@ -1,19 +1,21 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, RouterStateSnapshot} from "@angular/router";
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {ActivatedRoute, RouterStateSnapshot, Router} from "@angular/router";
 import {StarWarsService} from "../heros.service";
-import {Observable} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 
 @Component({
   selector: 'app-hero',
   templateUrl: 'hero.component.html',
   styleUrls: ['hero.component.css']
 })
-export class HeroComponent implements OnInit {
+export class HeroComponent implements OnInit, OnDestroy {
 
   hero: Observable<any>;
   description: string;
+  querySub: Subscription;
 
-  constructor(private router: ActivatedRoute,
+  constructor(private route: ActivatedRoute,
+              private router: Router,
               private starwarService: StarWarsService) {
 
   }
@@ -25,12 +27,18 @@ export class HeroComponent implements OnInit {
      */
 
     // since herocomponent get init everytime, it would be better to use snapshot for proferemence
-    const heroId = this.router.snapshot.params['id'];
+    const heroId = this.route.snapshot.params['id'];
     this.hero = this.starwarService.getPersonDetail(heroId);
 
-    this.router.queryParams.subscribe(
+    this.querySub = this.route.queryParams.subscribe(
       param => this.description = param['description']
-    )
+    );
+
+    console.log("observers", this.route.queryParams['observers'].length)
+  }
+
+  ngOnDestroy(){
+    this.querySub.unsubscribe()
   }
 
 }
