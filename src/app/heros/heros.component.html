@@ -3,6 +3,7 @@ Search Index: <input type="text" placeholder="Search" (keyup.enter)="getHeroByIn
   <li *ngFor="let hero of heros | async">
     <a [routerLink]="hero.id"
        routerLinkActive="active"
+       [queryParams]="{description: 'Starwar Hero '}"
        [routerLinkActiveOptions]="{exact: true}">{{hero.name}}</a>
   </li>
 

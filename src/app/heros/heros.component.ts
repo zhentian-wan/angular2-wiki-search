@@ -20,7 +20,12 @@ export class HerosComponent implements OnInit {
   getHeroByIndex(i){
    // this.router.navigateByUrl(`/heros/${i}`);
    // this.router.navigate(['heros', i]);
-    this.router.navigate([i], {relativeTo: this.route})
+    this.router.navigate([i], {
+      relativeTo: this.route,
+      queryParams: {
+        description: 'Star war Hero'
+      }
+    })
   }
 
 }
