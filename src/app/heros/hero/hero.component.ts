@@ -16,8 +16,12 @@ export class HeroComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.hero = this.router.params
+   /* this.hero = this.router.params
       .map((p:any) => p.id)
+      .switchMap( id => this.starwarService.getPersonDetail(id));
+      */
+
+    this.hero = Observable.of(this.router.snapshot.params['id'])
       .switchMap( id => this.starwarService.getPersonDetail(id));
   }
 
