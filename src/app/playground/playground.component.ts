@@ -1,6 +1,7 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {ViewChild} from "@angular/core/src/metadata/di";
 import {Observable, Subscription} from "rxjs";
+import 'rxjs/operator/takeUntil';
 
 @Component({
   selector: 'app-playground',
@@ -13,18 +14,26 @@ export class PlaygroundComponent implements OnInit, OnDestroy {
   @ViewChild('left') left;
   @ViewChild('up') up;
   @ViewChild('down') down;
+  @ViewChild('ball') ball;
 
   position;
   ballSub$: Subscription;
+  dadSub$: Subscription;
 
   constructor() {
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.ballSub$.unsubscribe();
+    this.dadSub$.unsubscribe();
   }
 
   ngOnInit() {
+    this.btnsMove();
+    this.dragAndDrog();
+  }
+
+  btnsMove() {
     const rightBtn = this.right.nativeElement;
     const leftBtn = this.left.nativeElement;
     const upBtn = this.up.nativeElement;
@@ -54,6 +63,24 @@ export class PlaygroundComponent implements OnInit, OnDestroy {
       .subscribe(
         p => this.position = p
       )
+  }
+
+  dragAndDrog() {
+    const ball = this.ball.nativeElement;
+    const mouseup$ = Observable.fromEvent(document, 'mouseup');
+    const mousedown$ = Observable.fromEvent(ball, 'mousedown');
+    const mousemove$ = Observable.fromEvent(document, 'mousemove');
+
+    this.dadSub$ = mousedown$
+      .switchMap(e => mousemove$.takeUntil(mouseup$))
+      .subscribe(
+        p => {
+          this.position = {
+            x: p.clientX - 50,
+            y: p.clientY - 50
+          }
+        }
+      );
   }
 
 }
