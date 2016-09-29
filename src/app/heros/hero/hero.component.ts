@@ -32,6 +32,7 @@ export class HeroComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.hero = this.route.params
      .map((p:any) => {
+      this.editing = false;
       this.heroId = p.id;
       return p.id;
      })
