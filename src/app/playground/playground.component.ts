@@ -2,6 +2,7 @@ import {Component, OnInit, OnDestroy} from '@angular/core';
 import {ViewChild} from "@angular/core/src/metadata/di";
 import {Observable, Subscription} from "rxjs";
 import 'rxjs/operator/takeUntil';
+import TweenLite from 'gsap';
 
 @Component({
   selector: 'app-playground',
@@ -15,8 +16,10 @@ export class PlaygroundComponent implements OnInit, OnDestroy {
   @ViewChild('up') up;
   @ViewChild('down') down;
   @ViewChild('ball') ball;
+  @ViewChild('canvas') canvas;
 
   position;
+
   ballSub$: Subscription;
   dadSub$: Subscription;
 
@@ -26,11 +29,13 @@ export class PlaygroundComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.ballSub$.unsubscribe();
     this.dadSub$.unsubscribe();
+
   }
 
   ngOnInit() {
     this.btnsMove();
     this.dragAndDrog();
+    this.animate()
   }
 
   btnsMove() {
@@ -83,4 +88,34 @@ export class PlaygroundComponent implements OnInit, OnDestroy {
       );
   }
 
+  animate(){
+    const mousedown$ = Observable.fromEvent(this.canvas.nativeElement, 'click');
+    mousedown$
+      .map( e => ({x: e.clientX - 50, y: e.clientY - 50}))
+      .startWith(
+        {
+          x: 100,
+          y: 100
+        }
+      )
+      .pairwise(2)
+      .map( p => {
+        const p1 = p[0];
+        const p2 = p[1];
+        return {x1: p1.x, y1: p1.y, x2: p2.x, y2: p2.y};
+      })
+      .do(r => console.log(r))
+      .subscribe(
+        p => {
+          TweenLite.fromTo(this.ball.nativeElement, 0.5,
+            {
+              left: p.x1, top: p.y1
+            },
+            {
+              left: p.x2, top: p.y2
+            }
+          )
+        }
+      )
+  }
 }
