@@ -5,6 +5,7 @@ import herosRoutes from './heros.routes';
 import {HeroComponent} from "./hero/hero.component";
 import {StarWarsService} from "./heros.service";
 import {RouterModule} from "@angular/router";
+import {CanHeroDeactivate} from "./CanDeactiveHero.directive";
 
 @NgModule({
   imports: [
@@ -12,6 +13,6 @@ import {RouterModule} from "@angular/router";
     herosRoutes
   ],
   declarations: [HerosComponent, HeroComponent],
-  providers: [StarWarsService]
+  providers: [StarWarsService, CanHeroDeactivate]
 })
 export default class HerosModule { }

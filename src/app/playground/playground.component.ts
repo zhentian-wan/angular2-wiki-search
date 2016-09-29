@@ -82,7 +82,7 @@ export class PlaygroundComponent implements OnInit, OnDestroy {
         .switchMap(e => mousedown$)
         .switchMap(e => mousemove$.takeUntil(mouseup$))
         .subscribe(
-          p => {
+          (p:MouseEvent) => {
             this.position = {
               x: p.clientX - 50,
               y: p.clientY - 50
@@ -94,7 +94,7 @@ export class PlaygroundComponent implements OnInit, OnDestroy {
   animate() {
     const mousedown$ = Observable.fromEvent(this.canvas.nativeElement, 'click');
     mousedown$
-      .map(e => ({x: e.clientX - 50, y: e.clientY - 50}))
+      .map((e: MouseEvent) => ({x: e.clientX - 50, y: e.clientY - 50}))
       .startWith(
         {
           x: 100,
@@ -102,19 +102,19 @@ export class PlaygroundComponent implements OnInit, OnDestroy {
         }
       )
       .pairwise(2)
-      .map(p => {
+      .map((p: MouseEvent) => {
         const p1 = p[0];
         const p2 = p[1];
         return {x1: p1.x, y1: p1.y, x2: p2.x, y2: p2.y};
       })
       .subscribe(
-        p => {
+        (p: any) => {
           TweenLite.fromTo(this.ball.nativeElement, 0.5,
             {
-              left: p.x1, top: p.y1
+              left: p['x1'], top: p['y1']
             },
             {
-              left: p.x2, top: p.y2
+              left: p['x2'], top: p['y2']
             }
           )
         }

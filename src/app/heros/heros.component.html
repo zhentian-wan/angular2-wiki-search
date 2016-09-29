@@ -6,7 +6,6 @@ Search Index: <input type="text" placeholder="Search" (keyup.enter)="getHeroByIn
        [queryParams]="{description: 'Starwar Hero '}"
        [routerLinkActiveOptions]="{exact: true}">{{hero.name}}</a>
   </li>
-
   <!-- we can also do [routerLink]="['/heros', hero.id]", this will point to "heros/1";
        if you do:  [routerLink]="['heros', hero.id]",  this will point to "heros/heros/1"
        Since we are already in heros module we just need to do [routerLink]="hero.id", point to "heros/1"

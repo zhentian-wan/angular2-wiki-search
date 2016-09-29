@@ -1,4 +1,15 @@
 <div>
   <h2>{{description}}: {{(hero | async)?.name}}</h2>
+  <div>
+    <a [routerLink]="['/heros', prev()]">Previous</a>
+    <a [routerLink]="['/heros', next()]">Next</a>
+  </div>
+  <div>
+    <input type="text" #inpRef (keyup.enter)="saveHero(inpRef.value)">
+  </div>
+  <br>
   <img src="{{(hero | async)?.image}}" alt="">
+  <div>
+    <a [routerLink]="['/heros']">Back</a>
+  </div>
 </div>

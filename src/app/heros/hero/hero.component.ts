@@ -1,5 +1,10 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
-import {ActivatedRoute, RouterStateSnapshot, Router} from "@angular/router";
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ViewChild,
+} from '@angular/core';
+import {ActivatedRoute, Router} from "@angular/router";
 import {StarWarsService} from "../heros.service";
 import {Observable, Subscription} from "rxjs";
 
@@ -10,9 +15,13 @@ import {Observable, Subscription} from "rxjs";
 })
 export class HeroComponent implements OnInit, OnDestroy {
 
+  @ViewChild('inpRef') input;
+
+  heroId: number;
   hero: Observable<any>;
   description: string;
   querySub: Subscription;
+  editing: boolean = false;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -21,14 +30,17 @@ export class HeroComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    /* this.hero = this.router.params
-     .map((p:any) => p.id)
+    this.hero = this.route.params
+     .map((p:any) => {
+      this.heroId = p.id;
+      return p.id;
+     })
      .switchMap( id => this.starwarService.getPersonDetail(id));
-     */
 
-    // since herocomponent get init everytime, it would be better to use snapshot for proferemence
-    const heroId = this.route.snapshot.params['id'];
-    this.hero = this.starwarService.getPersonDetail(heroId);
+
+   /* // since herocomponent get init everytime, it would be better to use snapshot for proferemence
+    this.heroId = this.route.snapshot.params['id'];
+    this.hero = this.starwarService.getPersonDetail(this.heroId);*/
 
     this.querySub = this.route.queryParams.subscribe(
       param => this.description = param['description']
@@ -37,8 +49,20 @@ export class HeroComponent implements OnInit, OnDestroy {
     console.log("observers", this.route.queryParams['observers'].length)
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.querySub.unsubscribe()
   }
 
+  saveHero(newName){
+    this.editing = true;
+    console.log("editing", this.editing)
+  }
+
+  prev(){
+    return Number(this.heroId) - 1;
+  }
+
+  next(){
+    return Number(this.heroId) + 1;
+  }
 }
