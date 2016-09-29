@@ -1,0 +1,13 @@
+#playground{
+  position: relative;
+}
+.ball{
+  height: 60px;
+  width: 60px;
+  border-radius: 30px;
+  border: red 3px solid;
+  background-color: aquamarine;
+  position: absolute;
+  left: 20px;
+  top: 20px;
+}

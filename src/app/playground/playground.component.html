@@ -1,0 +1,17 @@
+<section id="playground">
+
+
+  <button #left>Left</button>
+  <button #right>Right</button>
+  <button #up>Up</button>
+  <button #down>Down</button>
+
+  <section>
+    <div class="ball" #ball
+      [style.left] = "position.x + 'px'"
+      [style.right] = "position.x + 'px'"
+      [style.top] = "position.y + 'px'"
+      [style.bottom] = "position.y + 'px'"
+    ></div>
+  </section>
+</section>
