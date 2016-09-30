@@ -2,6 +2,7 @@ import {Component, OnInit, OnDestroy} from '@angular/core';
 import {ViewChild} from "@angular/core/src/metadata/di";
 import {Observable, Subscription} from "rxjs";
 import 'rxjs/operator/takeUntil';
+import TweenLite from 'gsap';
 
 @Component({
   selector: 'app-playground',
@@ -15,8 +16,10 @@ export class PlaygroundComponent implements OnInit, OnDestroy {
   @ViewChild('up') up;
   @ViewChild('down') down;
   @ViewChild('ball') ball;
+  @ViewChild('canvas') canvas;
 
   position;
+
   ballSub$: Subscription;
   dadSub$: Subscription;
 
@@ -26,11 +29,13 @@ export class PlaygroundComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.ballSub$.unsubscribe();
     this.dadSub$.unsubscribe();
+
   }
 
   ngOnInit() {
     this.btnsMove();
     this.dragAndDrog();
+    this.animate()
   }
 
   btnsMove() {
@@ -67,20 +72,52 @@ export class PlaygroundComponent implements OnInit, OnDestroy {
 
   dragAndDrog() {
     const ball = this.ball.nativeElement;
+    const enter$ = Observable.fromEvent(ball, 'mouseenter');
     const mouseup$ = Observable.fromEvent(document, 'mouseup');
     const mousedown$ = Observable.fromEvent(ball, 'mousedown');
     const mousemove$ = Observable.fromEvent(document, 'mousemove');
 
-    this.dadSub$ = mousedown$
-      .switchMap(e => mousemove$.takeUntil(mouseup$))
-      .subscribe(
-        p => {
-          this.position = {
-            x: p.clientX - 50,
-            y: p.clientY - 50
+    this.dadSub$ =
+      enter$
+        .switchMap(e => mousedown$)
+        .switchMap(e => mousemove$.takeUntil(mouseup$))
+        .subscribe(
+          (p:MouseEvent) => {
+            this.position = {
+              x: p.clientX - 50,
+              y: p.clientY - 50
+            }
           }
-        }
-      );
+        );
   }
 
+  animate() {
+    const mousedown$ = Observable.fromEvent(this.canvas.nativeElement, 'click');
+    mousedown$
+      .map((e: MouseEvent) => ({x: e.clientX - 50, y: e.clientY - 50}))
+      .startWith(
+        {
+          x: 100,
+          y: 100
+        }
+      )
+      .pairwise(2)
+      .map((p: MouseEvent) => {
+        const p1 = p[0];
+        const p2 = p[1];
+        return {x1: p1.x, y1: p1.y, x2: p2.x, y2: p2.y};
+      })
+      .subscribe(
+        (p: any) => {
+          TweenLite.fromTo(this.ball.nativeElement, 0.5,
+            {
+              left: p['x1'], top: p['y1']
+            },
+            {
+              left: p['x2'], top: p['y2']
+            }
+          )
+        }
+      )
+  }
 }

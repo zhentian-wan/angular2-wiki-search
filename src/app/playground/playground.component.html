@@ -6,12 +6,13 @@
   <button #up>Up</button>
   <button #down>Down</button>
 
-  <section>
-    <div class="ball" #ball
-      [style.left] = "position.x + 'px'"
-      [style.right] = "position.x + 'px'"
-      [style.top] = "position.y + 'px'"
-      [style.bottom] = "position.y + 'px'"
-    ></div>
+  <section id="canvas" #canvas>
+
   </section>
+  <div class="ball" #ball
+       [style.left]="position.x + 'px'"
+       [style.right]="position.x + 'px'"
+       [style.top]="position.y + 'px'"
+       [style.bottom]="position.y + 'px'"
+  ></div>
 </section>
