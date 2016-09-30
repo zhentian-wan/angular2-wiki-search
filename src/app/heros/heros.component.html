@@ -1,10 +1,13 @@
 Search Index: <input type="text" placeholder="Search" (keyup.enter)="getHeroByIndex(inpRef.value)" #inpRef />
+<h3>
+  Unknow mass hero is private, you can not visit
+</h3>
 <ul>
   <li *ngFor="let hero of heros | async">
     <a [routerLink]="hero.id"
        routerLinkActive="active"
        [queryParams]="{description: 'Starwar Hero '}"
-       [routerLinkActiveOptions]="{exact: true}">{{hero.name}}</a>
+       [routerLinkActiveOptions]="{exact: true}">{{hero.name}}, {{hero.mass}}</a>
   </li>
   <!-- we can also do [routerLink]="['/heros', hero.id]", this will point to "heros/1";
        if you do:  [routerLink]="['heros', hero.id]",  this will point to "heros/heros/1"

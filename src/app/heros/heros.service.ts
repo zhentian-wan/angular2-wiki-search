@@ -7,6 +7,8 @@ import "rxjs/add/operator/switchMap";
 @Injectable()
 export class StarWarsService {
 
+    people:any;
+
     constructor(@Inject(STARWARS_BASE_URL) private starwarUrl,
       private http: Http
     ) {}
@@ -14,6 +16,7 @@ export class StarWarsService {
     getPeople(){
       return this.http.get(`${this.starwarUrl}/people`)
         .map( res => res.json())
+        .do( res => this.people = res)
     }
 
     getPersonDetail(id){
