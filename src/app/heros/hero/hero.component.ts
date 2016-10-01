@@ -26,7 +26,7 @@ export class HeroComponent implements OnInit, OnDestroy {
   hero: BehaviorSubject<Hero>;
   description: string;
   querySub: Subscription;
-  editing: boolean = false; 
+  editing: boolean = false;
 
   constructor(private route: ActivatedRoute,
               private router: Router,

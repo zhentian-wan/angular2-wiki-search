@@ -1,3 +1,6 @@
+#[DEMO](https://angular2-firebase-961ae.firebaseapp.com)
+
+
 # WikiSearch
 
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.15.
