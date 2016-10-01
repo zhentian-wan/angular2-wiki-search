@@ -2,7 +2,7 @@ import {Component, OnInit, OnDestroy} from '@angular/core';
 import {ViewChild} from "@angular/core/src/metadata/di";
 import {Observable, Subscription} from "rxjs";
 import 'rxjs/operator/takeUntil';
-import TweenLite from 'gsap';
+import {fromTo} from 'gsap';
 
 @Component({
   selector: 'app-playground',
@@ -109,7 +109,7 @@ export class PlaygroundComponent implements OnInit, OnDestroy {
       })
       .subscribe(
         (p: any) => {
-          TweenLite.fromTo(this.ball.nativeElement, 0.5,
+          fromTo(this.ball.nativeElement, 0.5,
             {
               left: p['x1'], top: p['y1']
             },
