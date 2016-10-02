@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {Input} from "@angular/core/src/metadata/directives";
-import {WikiSearchService} from "../../shared/wiki-search.service";
 
 @Component({
   selector: 'result-list',
@@ -9,7 +8,9 @@ import {WikiSearchService} from "../../shared/wiki-search.service";
 })
 export class ResultListComponent implements OnInit {
 
-  @Input('input') searchResult: Array<string> = [];
+  @Input('keys') searchResult;
+  @Input('urls') urls;
+
   constructor() {
 
   }

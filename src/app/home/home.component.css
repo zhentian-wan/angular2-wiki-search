@@ -1,0 +1,10 @@
+.list{
+  width: 300px;
+  float: left;
+}
+
+.detail{
+  width: auto;
+  height: 100%;
+  background: lavender;
+}

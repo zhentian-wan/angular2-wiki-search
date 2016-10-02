@@ -11,14 +11,19 @@ export class SearchBarComponent implements OnInit, OnDestroy {
 
   term$ = new Subject<string>();
   items: Observable<Array<string>>;
+  urls: Observable<Array<string>>;
   search;
   searchSub: Subscription;
   @Output() searchResult = new EventEmitter();
+  @Output() details = new EventEmitter();
+
   constructor(private wikiSearch: WikiSearchService) {
     this.searchSub = this.wikiSearch.search(this.term$)
       .subscribe( res => {
-        this.items = res;
+        this.items = res.keys;
+        this.urls = res.urls;
         this.searchResult.next(this.items);
+        this.details.next(this.urls);
       });
 
   }
