@@ -10,6 +10,8 @@ import {API_URL, STARWARS_BASE_URL} from "./shared/constance.service";
 import appRoutes from './app.routes';
 import {APP_BASE_HREF} from "@angular/common";
 import { NotFoundComponent } from './shared-components/not-found/not-found.component';
+import {firebaseConfig} from "../environments/firebase.config";
+import {AngularFireModule} from "angularfire2";
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import { NotFoundComponent } from './shared-components/not-found/not-found.compo
     FormsModule,
     HttpModule,
     JsonpModule,
-    SharedServiceModule.forRoot()
+    SharedServiceModule.forRoot(),
+    AngularFireModule.initializeApp(firebaseConfig)
   ],
   providers: [
     {provide: APP_BASE_HREF, useValue: '/'},

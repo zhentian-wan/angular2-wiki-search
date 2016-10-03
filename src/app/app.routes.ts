@@ -1,6 +1,6 @@
-import {RouterModule} from "@angular/router";
+//noinspection TypeScriptCheckImport
+import {RouterModule, PreloadingStrategy, PreloadAllModules} from "@angular/router";
 import {NotFoundComponent} from "./shared-components/not-found/not-found.component";
-import {DetailViewComponent} from "./home/detail-view/detail-view.component";
 
 const indexRoute = {path: '', loadChildren: 'app/home/home.module'};
 const fallbackRoute = {path: '**', component: NotFoundComponent};
@@ -17,4 +17,4 @@ const routes = [
   fallbackRoute,
 ];
 
-export default RouterModule.forRoot(routes);
+export default RouterModule.forRoot(routes, {useHash: true});

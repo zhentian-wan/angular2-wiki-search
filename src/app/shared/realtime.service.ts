@@ -1,26 +1,14 @@
 import { Injectable } from '@angular/core';
-import {initializeApp , database} from 'firebase';
+import {AngularFire, FirebaseListObservable} from "angularfire2";
 
 @Injectable()
 export class RealtimeService {
 
-  constructor() {
-
-    // Initialize Firebase
-    const config = {
-      apiKey: "AIzaSyDiS_LY_Sz9Go1KxvDCaF4vAIuhvjeQf2k",
-      authDomain: "angular2-firebase-961ae.firebaseapp.com",
-      databaseURL: "https://angular2-firebase-961ae.firebaseio.com",
-      storageBucket: "angular2-firebase-961ae.appspot.com",
-      messagingSenderId: "576526414161"
-    };
-    initializeApp(config);
-
-    var root = database().ref();
-
-    root.on('value', function(snapshot){
-      console.log(snapshot.val())
-    })
+  constructor(private af: AngularFire) {
+    const courses$: FirebaseListObservable<any> = af.database.list('courses');
+    courses$.subscribe(
+      val => console.log("val", JSON.stringify(val, null, 2))
+    )
   }
 
 }

@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RealtimeComponent } from './realtime.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {RealtimeComponent} from './realtime.component';
 import realtimeRoutes from './realtime.routes';
 
 @NgModule({
@@ -10,4 +10,5 @@ import realtimeRoutes from './realtime.routes';
   ],
   declarations: [RealtimeComponent]
 })
-export default class RealtimeModule { }
+export default class RealtimeModule {
+}
