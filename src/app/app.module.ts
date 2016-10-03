@@ -13,6 +13,7 @@ import { NotFoundComponent } from './shared-components/not-found/not-found.compo
 import {firebaseConfig} from "../environments/firebase.config";
 import {AngularFireModule} from "angularfire2";
 
+
 @NgModule({
   declarations: [
     AppComponent,
