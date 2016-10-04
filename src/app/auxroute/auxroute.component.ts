@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-auxroute',
@@ -6,8 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./auxroute.component.css']
 })
 export class AuxrouteComponent implements OnInit {
-
-  constructor() { }
+  search: string;
+  constructor(private route: ActivatedRoute) {
+    this.route.queryParams.subscribe((param)=>{
+      this.search = param['search'];
+    })
+  }
 
   ngOnInit() {
   }

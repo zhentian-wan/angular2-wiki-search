@@ -1,5 +1,4 @@
-//noinspection TypeScriptCheckImport
-import {RouterModule, PreloadingStrategy, PreloadAllModules} from "@angular/router";
+import {RouterModule} from "@angular/router";
 import {NotFoundComponent} from "./shared-components/not-found/not-found.component";
 
 const indexRoute = {path: '', loadChildren: 'app/home/home.module'};
@@ -13,6 +12,7 @@ const routes = [
   {path: 'playground', loadChildren: 'app/playground/playground.module', name: 'Playground'},
   {path: 'realtime', loadChildren: 'app/realtime/realtime.module', name: 'Realtime'},
   {path: 'wiki-path', loadChildren: 'app/auxroute/auxroute.module', name: 'WikiDetail', outlet: 'wiki'},
+  {path: 'courses', loadChildren: 'app/courses/courses.module', name: 'Courses'},
   indexRoute,
   fallbackRoute,
 ];

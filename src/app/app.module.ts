@@ -1,15 +1,15 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {FormsModule} from '@angular/forms';
 import {HttpModule, JsonpModule} from '@angular/http';
 
-import { AppComponent } from './app.component';
+import {AppComponent} from './app.component';
 import {SharedServiceModule} from "./shared/index";
 import {API_URL, STARWARS_BASE_URL} from "./shared/constance.service";
 
 import appRoutes from './app.routes';
 import {APP_BASE_HREF} from "@angular/common";
-import { NotFoundComponent } from './shared-components/not-found/not-found.component';
+import {NotFoundComponent} from './shared-components/not-found/not-found.component';
 import {firebaseConfig} from "../environments/firebase.config";
 import {AngularFireModule} from "angularfire2";
 
@@ -41,4 +41,5 @@ import {AngularFireModule} from "angularfire2";
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
