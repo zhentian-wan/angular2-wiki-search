@@ -6,3 +6,14 @@ a.active{
   font-weight: bold;
   color: darkred;
 }
+
+.main{
+  width: auto;
+  float: left;
+  height: 100%;
+}
+
+.right-detail{
+  width: 30%;
+  height: 100%;
+}

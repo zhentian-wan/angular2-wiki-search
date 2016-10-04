@@ -1,8 +1,8 @@
 <md-toolbar color="acient">
   Wiki Search
 </md-toolbar>
-<search-bar (searchResult)="items = $event"></search-bar>
-<result-list [input]="items">
+<search-bar (searchResult)="items = $event" (details)="urls = $event"></search-bar>
+<result-list [keys]="items" [urls]="urls" class="list">
   Search Result
 </result-list>
 

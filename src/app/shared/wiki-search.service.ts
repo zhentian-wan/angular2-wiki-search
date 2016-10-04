@@ -25,7 +25,15 @@ export class WikiSearchService {
 
     return this.jsonp.get(`${this.apiUrl}`, {search})
       .map( (res) => {
-        return res.json()[1];
+        const data = res.json();
+        return {
+          keys: [
+            ...data[1]
+          ],
+          urls: [
+            ...data[3]
+          ]
+        }
       });
   }
 

@@ -7,7 +7,10 @@ export class SharedServiceModule{
   static forRoot(){
     return {
       ngModule: SharedServiceModule,
-      providers: [WikiSearchService, RealtimeService]
+      providers: [
+        WikiSearchService,
+        RealtimeService
+      ]
     }
   }
 }

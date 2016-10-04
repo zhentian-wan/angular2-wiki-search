@@ -1,31 +1,43 @@
 <nav>
-  <a [routerLink]="'home'"
+  <a [routerLink]="['/home']"
      routerLinkActive="active"
      [routerLinkActiveOptions]="{exact: true}">Home</a>
   <a
-    [routerLink]="'heros'"
+    [routerLink]="'/heros'"
     routerLinkActive="active"
     [routerLinkActiveOptions]="{exact: true}"
   >Heros</a>
   <a
-    [routerLink]="'contact'"
+    [routerLink]="'/contact'"
     routerLinkActive="active"
   >Contact</a>
   <a
-    [routerLink]="'message'"
+    [routerLink]="'/message'"
     routerLinkActive="active"
   >Message</a>
   <a
-    [routerLink]="'playground'"
+    [routerLink]="'/playground'"
     routerLinkActive="active"
   >Playground</a>
   <a
-    [routerLink]="'realtime'"
+    [routerLink]="'/courses'"
+    routerLinkActive="active"
+  >Courses</a>
+  <!--<a
+    [routerLink]="'/realtime'"
     routerLinkActive="active"
   >Realtime</a>
   <a
-    [routerLink]="'wefawefaw'"
+    [routerLink]="'/randome'"
     routerLinkActive="active"
-  >random</a>
+  >random</a>-->
+  <!--<a
+    [routerLink]="'/legacy-url/1'"
+    routerLinkActive="active"
+  >legacy-url/1 -- prefix matching</a>-->
 </nav>
-<router-outlet></router-outlet>
+
+
+<router-outlet class="main"></router-outlet>
+<router-outlet name="wiki" class="right-detail"></router-outlet>
+
