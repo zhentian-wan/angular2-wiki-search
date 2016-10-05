@@ -17,7 +17,7 @@ export class WikiSearchService {
       .switchMap(term => this.rawsearch(term));
   }
 
-  rawsearch(term: string){
+  rawsearch(term: string = ""){
     let search = new URLSearchParams();
     search.set('action', 'opensearch');
     search.set('search', term);
@@ -25,15 +25,11 @@ export class WikiSearchService {
 
     return this.jsonp.get(`${this.apiUrl}`, {search})
       .map( (res) => {
-        const data = res.json();
-        return {
-          keys: [
-            ...data[1]
-          ],
-          urls: [
-            ...data[3]
-          ]
-        }
+          return {
+            keys: res.json()[1],
+            urls: res.json()[3]
+          }
+
       });
   }
 

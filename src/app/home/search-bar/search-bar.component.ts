@@ -18,32 +18,27 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   @Output() searchResult = new EventEmitter();
   @Output() details = new EventEmitter();
 
-  constructor(private wikiSearch: WikiSearchService, private router: Router) {
+  constructor(private wikiSearch: WikiSearchService) {
     this.searchSub = this.wikiSearch.search(this.term$)
-      .subscribe( res => {
+      .subscribe(res => {
+
         this.items = res.keys;
         this.urls = res.urls;
         this.searchResult.next(this.items);
         this.details.next(this.urls);
+
       });
 
   }
 
-  clean(inp){
-    this.auxRouter(inp.value);
+  clean(inp) {
     inp.value = "";
-  }
-
-  auxRouter(inp){
-    this.router.navigateByUrl(
-      `/home(wiki:wiki-path;search=${inp})`
-    )
   }
 
   ngOnInit() {
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.searchSub.unsubscribe();
   }
 }
