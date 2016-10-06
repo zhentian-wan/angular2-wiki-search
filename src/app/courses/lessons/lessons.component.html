@@ -1,6 +1,6 @@
 <md-list>
   <md-list-item *ngFor="let lesson of lessons">
-    <a *ngIf="lesson.videoUrl" [href]="lesson.videoUrl">{{lesson.description}}</a>
-    <span *ngIf="!lesson.videoUrl">{{lesson.url}}</span>
+    <a *ngIf="lesson.hasVideoUrl" [href]="lesson.videoUrl">{{lesson.description}}</a>
+    <span *ngIf="!lesson.hasVideoUrl">{{lesson.url}}</span>
   </md-list-item>
 </md-list>

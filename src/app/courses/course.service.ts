@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {RealtimeService} from "../shared";
 import {FirebaseListObservable} from "angularfire2";
 import {Lesson} from "./lessons/lessons";
@@ -16,11 +16,12 @@ export class CourseService {
     this.getLastCourse();
   }
 
-  getLessons(){
-    return this.lessons$;
+  getLessons() {
+    return this.lessons$
+      .map(Lesson.fromJsonList);
   }
 
-  addCourse(course){
+  addCourse(course) {
     return this.courses$.push(course)
       .then(
         success => success.key,
@@ -28,7 +29,7 @@ export class CourseService {
       );
   }
 
-  removeCourse(course){
+  removeCourse(course) {
     return this.courses$.remove(course)
       .then(
         () => "OK",
@@ -36,7 +37,7 @@ export class CourseService {
       );
   }
 
-  updateCourse(course, updates){
+  updateCourse(course, updates) {
     return this.courses$.update(course, updates)
       .then(
         () => "OK",
@@ -44,7 +45,7 @@ export class CourseService {
       );
   }
 
-  getLastCourse(){
+  getLastCourse() {
     this.courses$
       .subscribe(
         courses => {

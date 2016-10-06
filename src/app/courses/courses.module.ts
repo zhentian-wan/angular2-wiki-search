@@ -1,12 +1,10 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { coursesRouting } from './courses.routing';
-import { CoursesComponent } from './courses.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {coursesRouting} from './courses.routing';
+import {CoursesComponent} from './courses.component';
 import {CourseService} from "./course.service";
-import {MdButtonModule} from "@angular2-material/button";
-import { LessonsComponent } from './lessons/lessons.component';
+import {LessonsComponent} from './lessons/lessons.component';
 import {MaterialModule} from "@angular/material";
-import {LessonsService} from "./lessons/lessons.service";
 
 @NgModule({
   imports: [
@@ -16,8 +14,8 @@ import {LessonsService} from "./lessons/lessons.service";
   ],
   declarations: [CoursesComponent, LessonsComponent],
   providers: [
-    CourseService,
-    LessonsService
+    CourseService
   ]
 })
-export default class CoursesModule { }
+export default class CoursesModule {
+}
