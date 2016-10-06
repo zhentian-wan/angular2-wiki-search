@@ -5,9 +5,11 @@ import {AngularFire, FirebaseListObservable, FirebaseObjectObservable} from "ang
 @Injectable()
 export class RealtimeService {
   courses$: FirebaseListObservable<any>;
+  lessons$: FirebaseListObservable<any>;
 
   constructor(private af: AngularFire) {
     this.courses$ = this.af.database.list('courses');
+    this.lessons$ = this.af.database.list('lessons');
     /*const course$: FirebaseObjectObservable<any> = af.database.object('courses/-KT0LsbuhHZGr5F4v7OV');
     course$.subscribe((c)=> {
       console.log("c", JSON.stringify(c, null, 2))
@@ -16,6 +18,10 @@ export class RealtimeService {
 
   getCourseObs(){
     return this.courses$;
+  }
+
+  getLessonObs(){
+    return this.lessons$;
   }
 
 }
