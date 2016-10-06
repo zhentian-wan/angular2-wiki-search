@@ -1,7 +1,15 @@
-<section>
-  <nav>
-    <button md-button md-raised-button color="primary" (click)="listPush()">Push</button>
-    <button md-button md-raised-button color="primary" (click)="removeListElm()">Remove</button>
-    <button md-button md-raised-button color="primary" (click)="updateListElm()">Update</button>
-  </nav>
-</section>
+<md-tab-group>
+  <md-tab>
+    <template md-tab-label>Angualr 2</template>
+    <template md-tab-content>
+      <app-lessons></app-lessons>
+    </template>
+  </md-tab>
+  <md-tab>
+    <template md-tab-label>Firebase</template>
+    <template md-tab-content>
+      <h2>Firebase</h2>
+      <p>...</p>
+    </template>
+  </md-tab>
+</md-tab-group>
