@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {LessonsService} from "./lessons.service";
+
 import {Lesson} from "./lessons";
+import {Input} from "@angular/core/src/metadata/directives";
 
 @Component({
   selector: 'app-lessons',
@@ -9,16 +10,12 @@ import {Lesson} from "./lessons";
 })
 export class LessonsComponent implements OnInit {
 
-  lessons: Array<Lesson>;
-  constructor(private lessonSerivce: LessonsService) {
+  @Input('lessons') lessons: Array<Lesson>;
+  constructor() {
 
   }
 
   ngOnInit() {
-    this.lessonSerivce.getAllLessons()
-      .subscribe( (lessons) => {
-        this.lessons = lessons;
-      });
   }
 
 }

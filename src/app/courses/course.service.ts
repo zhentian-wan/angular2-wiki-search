@@ -1,16 +1,23 @@
 import { Injectable } from '@angular/core';
 import {RealtimeService} from "../shared";
 import {FirebaseListObservable} from "angularfire2";
+import {Lesson} from "./lessons/lessons";
 
 @Injectable()
 export class CourseService {
 
   courses$: FirebaseListObservable<any>;
+  lessons$: FirebaseListObservable<Lesson[]>;
   public lastCourse: any;
 
   constructor(private rt: RealtimeService) {
     this.courses$ = rt.getCourseObs();
+    this.lessons$ = rt.getLessonObs();
     this.getLastCourse();
+  }
+
+  getLessons(){
+    return this.lessons$;
   }
 
   addCourse(course){
