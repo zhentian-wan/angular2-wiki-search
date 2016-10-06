@@ -2,7 +2,7 @@
   <md-tab>
     <template md-tab-label>Angualr 2</template>
     <template md-tab-content>
-      <app-lessons [lessons]="lessons"></app-lessons>
+      <app-lessons [lessons]="lessons | async"></app-lessons>
     </template>
   </md-tab>
   <md-tab>

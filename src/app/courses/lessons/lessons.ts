@@ -1,12 +1,12 @@
 /*export interface Lesson {
-  courseId: string;
-  description: string;
-  duration?: string;
-  longDescription?: string;
-  tags: string | string[];
-  url?: string;
-  videoUrl: string;
-}*/
+ courseId: string;
+ description: string;
+ duration?: string;
+ longDescription?: string;
+ tags: string | string[];
+ url?: string;
+ videoUrl: string;
+ }*/
 
 export class Lesson {
   constructor(public $key: string,
@@ -21,6 +21,14 @@ export class Lesson {
 
   get hasVideoUrl() {
     return !!this.videoUrl;
+  }
+
+  get hasMultiTags() {
+    if (this.tags instanceof Array) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   static fromJsonList(array): Lesson[] {
