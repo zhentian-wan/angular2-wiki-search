@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CourseService} from "./course.service";
 import {Observable} from "rxjs";
 import {Lesson} from "./lessons/lessons";
+import {Router, ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-courses',
@@ -11,11 +12,23 @@ import {Lesson} from "./lessons/lessons";
 export class CoursesComponent implements OnInit {
 
   lessons: Observable<Lesson>;
-  constructor(private courseService: CourseService) {
+  selectedIndex = 0;
+  constructor(private courseService: CourseService, private router: Router, private route: ActivatedRoute) {
+
   }
 
   ngOnInit() {
     this.lessons = this.courseService.getLessons();
+    this.route.params.subscribe(
+      param => {
+        this.selectedIndex = param['course']
+      }
+    )
+  }
+
+  listCourseLessons(e){
+    this.selectedIndex = e.index;
+    this.router.navigate(['courses', e.index]);
   }
 
   listPush() {
