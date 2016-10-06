@@ -21,7 +21,7 @@ export class CoursesComponent implements OnInit {
     this.lessons = this.courseService.getLessons();
     this.route.params.subscribe(
       param => {
-        this.selectedIndex = param['course']
+        this.selectedIndex = param['course'] || 0;
       }
     )
   }
