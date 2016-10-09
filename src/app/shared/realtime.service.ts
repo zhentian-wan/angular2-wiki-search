@@ -11,16 +11,16 @@ export class RealtimeService {
     this.courses$ = this.af.database.list('courses');
     this.lessons$ = this.af.database.list('lessons');
     /*const course$: FirebaseObjectObservable<any> = af.database.object('courses/-KT0LsbuhHZGr5F4v7OV');
-    course$.subscribe((c)=> {
-      console.log("c", JSON.stringify(c, null, 2))
-    });*/
+     course$.subscribe((c)=> {
+     console.log("c", JSON.stringify(c, null, 2))
+     });*/
   }
 
-  getCourseObs(){
+  getCourseObs() {
     return this.courses$;
   }
 
-  getLessonObs(){
+  getLessonObs() {
     return this.lessons$;
   }
 

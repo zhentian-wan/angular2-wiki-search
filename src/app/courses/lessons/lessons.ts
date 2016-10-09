@@ -1,12 +1,12 @@
 export interface ILesson {
- courseId: string;
- description: string;
- duration?: string;
- longDescription?: string;
- tags: string | string[];
- url?: string;
- videoUrl: string;
- }
+  courseId: string;
+  description: string;
+  duration?: string;
+  longDescription?: string;
+  tags: string | string[];
+  url?: string;
+  videoUrl: string;
+}
 
 export class Lesson {
   constructor(public $key: string,

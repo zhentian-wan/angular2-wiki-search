@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CourseService} from "./course.service";
 import {Lesson} from "./lessons/lessons";
 import {Router, ActivatedRoute} from "@angular/router";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-courses',
@@ -10,33 +11,15 @@ import {Router, ActivatedRoute} from "@angular/router";
 })
 export class CoursesComponent implements OnInit {
 
-  allLessons: Lesson[];
-  filteredLessons: Lesson[];
+  allLessons: Observable<Lesson[]>;
+  filteredLessons: Observable<Lesson[]>;
   selectedIndex = 0;
 
   constructor(private courseService: CourseService, private router: Router, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-
-    /**
-     * THOUGHT: When using Firebase, the result implement FirebaseListObservable,
-     *  Whcih is different from noraml Observable.
-     *
-     *  Should convert to Observable in Service by using:
-     *    .subscribe(lessons =>
-     *      this.lessons = Observable.from(lesson)
-     *    );
-     *  Then using async pipe in controller.
-     *
-     *
-     *  Or in Controller, do subscribe here, and just remove normal array and
-     *  remove async pipe?
-     * */
-
-
-    this.courseService.getLessons()
-      .subscribe(lessons => this.allLessons = this.filteredLessons = lessons);
+    this.allLessons = this.filteredLessons = this.courseService.getLessons();
     this.route.params.subscribe(
       param => {
         this.selectedIndex = param['course'] || 0;
@@ -46,9 +29,10 @@ export class CoursesComponent implements OnInit {
 
   search(term) {
     this.filteredLessons = this.allLessons
-      .filter((lesson: Lesson) => {
-        return lesson.description.indexOf(term) > -1;
-      })
+      .do(console.log) // lessons array
+      .map(lessons => lessons.filter(
+        lesson => lesson.description.indexOf(term) > -1
+      ));
   }
 
   listCourseLessons(e) {
