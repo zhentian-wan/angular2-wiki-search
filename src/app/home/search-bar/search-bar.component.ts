@@ -28,17 +28,16 @@ export class SearchBarComponent implements OnInit, OnDestroy {
         this.details.next(this.urls);
 
       });
-
   }
 
-  clean(inp) {
+  clean(inp): void {
     inp.value = "";
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.searchSub.unsubscribe();
   }
 }

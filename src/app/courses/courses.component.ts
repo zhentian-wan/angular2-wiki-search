@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {CourseService} from "./course.service";
-import {Observable} from "rxjs";
 import {Lesson} from "./lessons/lessons";
 import {Router, ActivatedRoute} from "@angular/router";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-courses',
@@ -11,14 +11,15 @@ import {Router, ActivatedRoute} from "@angular/router";
 })
 export class CoursesComponent implements OnInit {
 
-  lessons: Observable<Lesson>;
+  allLessons: Observable<Lesson[]>;
+  filteredLessons: Observable<Lesson[]>;
   selectedIndex = 0;
-  constructor(private courseService: CourseService, private router: Router, private route: ActivatedRoute) {
 
+  constructor(private courseService: CourseService, private router: Router, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.lessons = this.courseService.getLessons();
+    this.allLessons = this.filteredLessons = this.courseService.getLessons();
     this.route.params.subscribe(
       param => {
         this.selectedIndex = param['course'] || 0;
@@ -26,7 +27,15 @@ export class CoursesComponent implements OnInit {
     )
   }
 
-  listCourseLessons(e){
+  search(term) {
+    this.filteredLessons = this.allLessons
+      .do(console.log) // lessons array
+      .map(lessons => lessons.filter(
+        lesson => lesson.description.indexOf(term) > -1
+      ));
+  }
+
+  listCourseLessons(e) {
     this.selectedIndex = e.index;
     this.router.navigate(['courses', e.index]);
   }
@@ -45,7 +54,7 @@ export class CoursesComponent implements OnInit {
       );
   }
 
-  removeListElm(){
+  removeListElm() {
     const lastCourse = this.courseService.lastCourse;
     return this.courseService.removeCourse(lastCourse)
       .then(
@@ -53,10 +62,10 @@ export class CoursesComponent implements OnInit {
       );
   }
 
-  updateListElm(){
+  updateListElm() {
     const lastCourse = this.courseService.lastCourse;
     return this.courseService
-      .updateCourse(lastCourse, {longDescription : 'This is updated version'})
+      .updateCourse(lastCourse, {longDescription: 'This is updated version'})
       .then(
         res => console.log("updateListElm OK")
       )

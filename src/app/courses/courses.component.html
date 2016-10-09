@@ -1,12 +1,13 @@
+Search : <input type="text" placeholder="search lesson..." #inpRef (keyup)="search(inpRef.value)">
 <md-tab-group (selectChange)="listCourseLessons($event)" [selectedIndex]="selectedIndex">
   <md-tab>
-    <template md-tab-label  >Angualr 2</template>
+    <template md-tab-label>Angualr 2</template>
     <template md-tab-content>
-      <app-lessons [lessons]="lessons | async"></app-lessons>
+      <app-lessons [lessons]="filteredLessons| async"></app-lessons>
     </template>
   </md-tab>
   <md-tab>
-    <template md-tab-label  >Firebase</template>
+    <template md-tab-label>Firebase</template>
     <template md-tab-content>
       <h2>Firebase</h2>
       <p>...</p>

@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "angular2-firebase-961ae"
+    "default": "angular2-firebase-961ae",
+    "wiki": "angular2-firebase-961ae"
   }
 }
