@@ -1,4 +1,4 @@
-/*export interface Lesson {
+export interface ILesson {
  courseId: string;
  description: string;
  duration?: string;
@@ -6,7 +6,7 @@
  tags: string | string[];
  url?: string;
  videoUrl: string;
- }*/
+ }
 
 export class Lesson {
   constructor(public $key: string,

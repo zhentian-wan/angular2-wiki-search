@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {CourseService} from "./course.service";
-import {Observable} from "rxjs";
 import {Lesson} from "./lessons/lessons";
 import {Router, ActivatedRoute} from "@angular/router";
 
@@ -11,14 +10,33 @@ import {Router, ActivatedRoute} from "@angular/router";
 })
 export class CoursesComponent implements OnInit {
 
-  lessons: Observable<Lesson>;
+  allLessons: Lesson[];
+  filteredLessons: Lesson[];
   selectedIndex = 0;
-  constructor(private courseService: CourseService, private router: Router, private route: ActivatedRoute) {
 
+  constructor(private courseService: CourseService, private router: Router, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.lessons = this.courseService.getLessons();
+
+    /**
+     * THOUGHT: When using Firebase, the result implement FirebaseListObservable,
+     *  Whcih is different from noraml Observable.
+     *
+     *  Should convert to Observable in Service by using:
+     *    .subscribe(lessons =>
+     *      this.lessons = Observable.from(lesson)
+     *    );
+     *  Then using async pipe in controller.
+     *
+     *
+     *  Or in Controller, do subscribe here, and just remove normal array and
+     *  remove async pipe?
+     * */
+
+
+    this.courseService.getLessons()
+      .subscribe(lessons => this.allLessons = this.filteredLessons = lessons);
     this.route.params.subscribe(
       param => {
         this.selectedIndex = param['course'] || 0;
@@ -26,7 +44,14 @@ export class CoursesComponent implements OnInit {
     )
   }
 
-  listCourseLessons(e){
+  search(term) {
+    this.filteredLessons = this.allLessons
+      .filter((lesson: Lesson) => {
+        return lesson.description.indexOf(term) > -1;
+      })
+  }
+
+  listCourseLessons(e) {
     this.selectedIndex = e.index;
     this.router.navigate(['courses', e.index]);
   }
@@ -45,7 +70,7 @@ export class CoursesComponent implements OnInit {
       );
   }
 
-  removeListElm(){
+  removeListElm() {
     const lastCourse = this.courseService.lastCourse;
     return this.courseService.removeCourse(lastCourse)
       .then(
@@ -53,10 +78,10 @@ export class CoursesComponent implements OnInit {
       );
   }
 
-  updateListElm(){
+  updateListElm() {
     const lastCourse = this.courseService.lastCourse;
     return this.courseService
-      .updateCourse(lastCourse, {longDescription : 'This is updated version'})
+      .updateCourse(lastCourse, {longDescription: 'This is updated version'})
       .then(
         res => console.log("updateListElm OK")
       )
