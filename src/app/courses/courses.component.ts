@@ -3,6 +3,7 @@ import {CourseService} from "./course.service";
 import {Lesson} from "./lessons/lessons";
 import {Router, ActivatedRoute} from "@angular/router";
 import {Observable} from "rxjs";
+import {Course} from "./courses";
 
 @Component({
   selector: 'app-courses',
@@ -13,12 +14,14 @@ export class CoursesComponent implements OnInit {
 
   allLessons: Observable<Lesson[]>;
   filteredLessons: Observable<Lesson[]>;
+  allCourses: Observable<Course[]>;
   selectedIndex = 0;
 
   constructor(private courseService: CourseService, private router: Router, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
+    this.allCourses = this.courseService.getCourses();
     this.allLessons = this.filteredLessons = this.courseService.getLessons();
     this.route.params.subscribe(
       param => {

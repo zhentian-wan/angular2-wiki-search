@@ -26,6 +26,7 @@ export class HeroComponent implements OnInit, OnDestroy {
   hero: BehaviorSubject<Hero>;
   description: string;
   querySub: Subscription;
+  routeParam: Subscription;
   editing: boolean = false;
 
   constructor(private route: ActivatedRoute,
@@ -36,7 +37,7 @@ export class HeroComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.hero = new BehaviorSubject({name: 'Loading...', image: ''});
+    /*this.hero = new BehaviorSubject({name: 'Loading...', image: ''});
 
     this.route.params
      .map((p:any) => {
@@ -45,7 +46,17 @@ export class HeroComponent implements OnInit, OnDestroy {
       return p.id;
      })
      .switchMap( id => this.starwarService.getPersonDetail(id))
-    .subscribe( this.hero);
+    .subscribe( this.hero);*/
+
+    // Here using resolver instead of fetch on fly
+    this.routeParam = this.route.params
+      .map((p:any) => p.id)
+      .subscribe( (id) => {
+        this.editing = false;
+        this.heroId = id;
+      });
+    this.hero = this.route.data
+      .map((d:any)=> d['hero']);
 
 
    /* // since herocomponent get init everytime, it would be better to use snapshot for proferemence
@@ -60,7 +71,8 @@ export class HeroComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.querySub.unsubscribe()
+    this.querySub.unsubscribe();
+    this.routeParam.unsubscribe();
   }
 
   saveHero(newName){
