@@ -1,7 +1,7 @@
 import {RouterModule} from "@angular/router";
 import {NotFoundComponent} from "./shared-components/not-found/not-found.component";
 
-const indexRoute = {path: '', loadChildren: 'app/home/home.module'};
+const indexRoute = {path: '', redirectTo: 'home', pathMatch: 'full'};
 const fallbackRoute = {path: '**', component: NotFoundComponent};
 const routes = [
   {path: 'legacy-url', redirectTo: '/home', pathMatch: 'prefix'},
