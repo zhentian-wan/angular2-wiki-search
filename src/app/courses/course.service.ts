@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {RealtimeService} from "../shared";
 import {FirebaseListObservable} from "angularfire2";
 import {Lesson} from "./lessons/lessons";
+import {Course} from "./courses";
 
 @Injectable()
 export class CourseService {
@@ -14,6 +15,11 @@ export class CourseService {
     this.courses$ = rt.getCourseObs();
     this.lessons$ = rt.getLessonObs();
     this.getLastCourse();
+  }
+
+  getCourses(){
+    return this.courses$
+      .map(Course.fromJsonList)
   }
 
   getLessons() {
