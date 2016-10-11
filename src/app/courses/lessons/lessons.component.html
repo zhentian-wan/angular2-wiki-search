@@ -4,3 +4,10 @@
     <span *ngIf="!lesson.hasVideoUrl">{{lesson.url}}</span>
   </md-list-item>
 </md-list>
+
+<md-list>
+  <md-list-item *ngFor="let lesson of lessons$ | async">
+    <a *ngIf="lesson.hasVideoUrl" [href]="lesson.videoUrl">{{lesson.description}}</a>
+    <span *ngIf="!lesson.hasVideoUrl">{{lesson.url}}</span>
+  </md-list-item>
+</md-list>

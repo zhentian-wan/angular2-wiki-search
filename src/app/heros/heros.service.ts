@@ -3,6 +3,7 @@ import {STARWARS_BASE_URL} from "../shared/constance.service";
 import {Http} from "@angular/http";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/switchMap";
+import {Observable} from "rxjs";
 
 @Injectable()
 export class StarWarsService {
@@ -27,4 +28,5 @@ export class StarWarsService {
         }))
 
     }
+
 }
