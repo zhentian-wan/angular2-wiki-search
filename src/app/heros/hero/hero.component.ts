@@ -23,7 +23,7 @@ export class HeroComponent implements OnInit, OnDestroy {
   @ViewChild('inpRef') input;
 
   heroId: number;
-  hero: BehaviorSubject<Hero>;
+  hero: Observable<Hero>;
   description: string;
   querySub: Subscription;
   routeParam: Subscription;

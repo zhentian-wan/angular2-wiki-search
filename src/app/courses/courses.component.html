@@ -3,7 +3,7 @@ Search : <input type="text" placeholder="search lesson..." #inpRef (keyup)="sear
 <md-list>
   <md-list-item *ngFor="let course of allCourses | async">
     {{course.description}}
-    <button md-button class="md-raised">View</button>
+    <button md-button [routerLink]="course.url" class="md-raised">View</button>
   </md-list-item>
 </md-list>
 
