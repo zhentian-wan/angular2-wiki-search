@@ -38,7 +38,7 @@ export class CourseService {
   }
 
   findAllCourseLessons(courseUrl) {
-    this.findLessonsKeyPreCourseUrl(courseUrl)
+    return this.findLessonsKeyPreCourseUrl(courseUrl)
       .map((lessonKeys) => lessonKeys
         .map((lessonKey) => {
           return this.db.object(`lessons/${lessonKey.$key}`)

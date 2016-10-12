@@ -1,24 +1,15 @@
-Search : <input type="text" placeholder="search lesson..." #inpRef (keyup)="search(inpRef.value)">
 
-<md-list>
-  <md-list-item *ngFor="let course of allCourses | async">
-    {{course.description}}
-    <button md-button [routerLink]="course.url" class="md-raised">View</button>
-  </md-list-item>
-</md-list>
 
-<md-tab-group (selectChange)="listCourseLessons($event)" [selectedIndex]="selectedIndex">
-  <md-tab>
-    <template md-tab-label>Angualr 2</template>
-    <template md-tab-content>
-      <app-lessons [lessons]="filteredLessons| async"></app-lessons>
-    </template>
-  </md-tab>
-  <md-tab>
-    <template md-tab-label>Firebase</template>
-    <template md-tab-content>
-      <h2>Firebase</h2>
-      <p>...</p>
-    </template>
-  </md-tab>
-</md-tab-group>
+<table>
+  <tr *ngFor="let course of (allCourses | async)">
+    <td class="column course-icon">
+      <img [src]="course?.iconUrl">
+    </td>
+    <td class="column course-description">
+      {{course.description}}
+    </td>
+    <td>
+      <button [routerLink]="course.url">View</button>
+    </td>
+  </tr>
+</table>

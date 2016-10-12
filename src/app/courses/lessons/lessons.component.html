@@ -1,13 +1,44 @@
-<md-list>
-  <md-list-item *ngFor="let lesson of lessons">
-    <a *ngIf="lesson.hasVideoUrl" [href]="lesson.videoUrl">{{lesson.description}}</a>
-    <span *ngIf="!lesson.hasVideoUrl">{{lesson.url}}</span>
-  </md-list-item>
-</md-list>
 
-<md-list>
-  <md-list-item *ngFor="let lesson of lessons$ | async">
-    <a *ngIf="lesson.hasVideoUrl" [href]="lesson.videoUrl">{{lesson.description}}</a>
-    <span *ngIf="!lesson.hasVideoUrl">{{lesson.url}}</span>
-  </md-list-item>
-</md-list>
+
+<h2>{{ (course$ | async)?.description  }}</h2>
+
+
+<div class="lessons-list-container v-h-center-block-parent">
+
+  <div class="nav-bar">
+    <button (click)="previous()">Previous Page</button>
+    <button (click)="next()">Next Page</button>
+  </div>
+
+  <!-- Get from Input
+  <md-list>
+    <md-list-item *ngFor="let lesson of lessons">
+      <a *ngIf="lesson.hasVideoUrl" [href]="lesson.videoUrl">{{lesson.description}}</a>
+      <span *ngIf="!lesson.hasVideoUrl">{{lesson.url}}</span>
+    </md-list-item>
+  </md-list>-->
+
+  <!-- Get from Firebae-->
+  <table class="table lessons-list card card-strong">
+    <tbody>
+    <tr *ngFor="let lesson of lessons$ | async">
+      <td class="lesson-title"> {{lesson.description}} </td>
+      <td class="duration">
+        <i class="md-icon duration-icon">access_time</i>
+        <span>{{lesson.duration}}</span>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+
+  <div class="tools-bar">
+    <button routerLink="new" [queryParams]="{courseId: (course$ | async)?.$key }">
+      New Lesson
+    </button>
+  </div>
+
+</div>
+
+
+
