@@ -20,38 +20,35 @@ export class CourseService {
     this.getLastCourse();
   }
 
-  findCourseByUrl(courseUrl): Observable<Course>{
+  findCourseByUrl(courseUrl): Observable<Course> {
     return this.db.list('courses', {
       query: {
         orderByChild: 'url',
         equalTo: courseUrl
       }
     })
-    .map((courses) => courses[0]); // get courses document which url = courseUrl
+      .map((courses) => courses[0]); // get courses document which url = courseUrl
   }
 
-  findAllCourseLessons(courseUrl){
-    const course$ = this.findCourseByUrl(courseUrl);
-
-    const lessonsPreCourse$ = course$
+  findLessonsKeyPreCourseUrl(courseUrl) {
+    return this.findCourseByUrl(courseUrl)
       .filter(course => !!course)
-      .switchMap((course) => {
-        console.log(course);
-        return this.db.list(`lessonsPerCourse/${course.$key}`)
-      });
+      .map((course) => course.$key)
+      .switchMap((courseKey) => this.db.list(`lessonsPerCourse/${courseKey}`));
+  }
 
-    return lessonsPreCourse$
+  findAllCourseLessons(courseUrl) {
+    this.findLessonsKeyPreCourseUrl(courseUrl)
       .map((lessonKeys) => lessonKeys
-          .map( (lessonKey) => {
-             return this.db.object(`lessons/${lessonKey.$key}`)
-          }))
+        .map((lessonKey) => {
+          return this.db.object(`lessons/${lessonKey.$key}`)
+        }))
       .flatMap((res) => {
         return Observable.combineLatest(res);
       });
-
   }
 
-  getCourses(){
+  getCourses() {
     return this.courses$
       .map(Course.fromJsonList)
   }
