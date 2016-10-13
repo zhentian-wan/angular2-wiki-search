@@ -1,4 +1,4 @@
-import {RouterModule} from "@angular/router";
+import {RouterModule, PreloadAllModules} from "@angular/router";
 import {NotFoundComponent} from "./shared-components/not-found/not-found.component";
 
 const indexRoute = {path: '', redirectTo: 'home', pathMatch: 'full'};
@@ -17,4 +17,7 @@ const routes = [
   fallbackRoute,
 ];
 
-export default RouterModule.forRoot(routes, {useHash: true});
+export default RouterModule.forRoot(routes, {
+  useHash: true,
+  preloadingStrategy: PreloadAllModules
+});
