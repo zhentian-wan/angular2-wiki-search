@@ -12,6 +12,7 @@ import {APP_BASE_HREF} from "@angular/common";
 import {NotFoundComponent} from './shared-components/not-found/not-found.component';
 import {firebaseConfig} from "../environments/firebase.config";
 import {AngularFireModule} from "angularfire2";
+import {PreloadSelectedModuledsList} from "./shared/preload-router-list";
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import {AngularFireModule} from "angularfire2";
     {
       provide: STARWARS_BASE_URL,
       useValue: `https://starwars-json-server-ewtdxbyfdz.now.sh`
-    }
+    },
+    PreloadSelectedModuledsList
   ],
   bootstrap: [AppComponent]
 })
