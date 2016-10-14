@@ -14,10 +14,12 @@ import {Course} from "../courses";
 })
 export class LessonsComponent implements OnInit {
 
-  @Input('lessons') lessons: Array<Lesson>;
+ // @Input('lessons') lessons: Array<Lesson>;
 
   lessons$: Observable<Lesson[]>;
+  lessons: Lesson[];
   course$: Observable<Course>;
+  courseUrl: string;
 
   constructor(private courseService: CourseService, private route: ActivatedRoute) {
 
@@ -25,10 +27,29 @@ export class LessonsComponent implements OnInit {
 
   ngOnInit() {
     if(this.route.snapshot.params['url']){
-      const courseUrl = this.route.snapshot.params['url'];
-      this.course$ = this.courseService.findCourseByUrl(courseUrl);
-      this.lessons$ = this.courseService.findAllCourseLessons(courseUrl);
+      this.courseUrl = this.route.snapshot.params['url'];
+      this.course$ = this.courseService.findCourseByUrl(this.courseUrl);
+      this.courseService.findAllCourseLessons(this.courseUrl)
+        .subscribe(lessons => this.lessons = lessons);
     }
+  }
+
+  next(){
+    this.courseService.findNextPageLessons(
+      this.courseUrl,
+      this.lessons[this.lessons.length - 1],
+      3
+    )
+      .subscribe(lessons => this.lessons = lessons);
+  }
+
+  previous(){
+    this.courseService.findPreviousPageLessons(
+      this.courseUrl,
+      this.lessons[0],
+      3
+    )
+      .subscribe(lessons => this.lessons = lessons);
   }
 
 }
