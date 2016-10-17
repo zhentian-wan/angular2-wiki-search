@@ -12,7 +12,6 @@ const routes = [
   {path: 'message', loadChildren: 'app/message/message.module', name: 'Message'},
   {path: 'playground', loadChildren: 'app/playground/playground.module', name: 'Playground'},
   {path: 'realtime', loadChildren: 'app/realtime/realtime.module', name: 'Realtime'},
-  {path: 'wiki-path', loadChildren: 'app/auxroute/auxroute.module', name: 'WikiDetail', outlet: 'wiki'},
   {path: 'courses', loadChildren: 'app/courses/courses.module', name: 'Courses'},
   indexRoute,
   fallbackRoute,

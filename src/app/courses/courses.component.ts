@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, style, animate, transition, state, trigger} from '@angular/core';
 import {CourseService} from "./course.service";
 import {Lesson} from "./lessons/lessons";
 import {Router, ActivatedRoute} from "@angular/router";
@@ -8,7 +8,22 @@ import {Course} from "./courses";
 @Component({
   selector: 'app-courses',
   templateUrl: './courses.component.html',
-  styleUrls: ['./courses.component.css']
+  styleUrls: ['./courses.component.css'],
+  animations: [
+    trigger('courseHover', [
+      state('inactive', style({
+        backgroundColor: '#eee',
+        transform: 'scale(1)'
+      })),
+      state('active',   style({
+        backgroundColor: '#cfd8dc',
+        transform: 'scale(1.1)'
+      })),
+      transition('inactive => active', animate('100ms ease-in')),
+      transition('active => inactive', animate('100ms ease-out'))
+    ])
+  ]
+
 })
 export class CoursesComponent implements OnInit {
 
@@ -16,6 +31,7 @@ export class CoursesComponent implements OnInit {
   filteredLessons: Observable<Lesson[]>;
   allCourses: Observable<Course[]>;
   selectedIndex = 0;
+  hover: string = 'inactive';
 
   constructor(private courseService: CourseService, private router: Router, private route: ActivatedRoute) {
   }

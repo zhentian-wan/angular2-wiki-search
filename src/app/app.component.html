@@ -3,31 +3,27 @@
      routerLinkActive="active"
      [routerLinkActiveOptions]="{exact: true}">Home</a>
   <a
-    [routerLink]="'/heros'"
+    [routerLink]="['/heros', {outlets: {'wiki': null}}]"
     routerLinkActive="active"
     [routerLinkActiveOptions]="{exact: true}"
   >Heros</a>
   <a
-    [routerLink]="'/contact'"
+    [routerLink]="['/contact']"
     routerLinkActive="active"
   >Contact</a>
   <a
-    [routerLink]="'/message'"
+    [routerLink]="['/message']"
     routerLinkActive="active"
   >Message</a>
   <a
-    [routerLink]="'/playground'"
+    [routerLink]="['/playground']"
     routerLinkActive="active"
   >Playground</a>
   <a
-    [routerLink]="'/courses'"
+    [routerLink]="['/courses']"
     routerLinkActive="active"
   >Courses</a>
   <!--<a
-    [routerLink]="'/realtime'"
-    routerLinkActive="active"
-  >Realtime</a>
-  <a
     [routerLink]="'/randome'"
     routerLinkActive="active"
   >random</a>-->

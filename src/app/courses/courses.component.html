@@ -1,7 +1,6 @@
-
-
 <table>
-  <tr *ngFor="let course of (allCourses | async)">
+  <tr *ngFor="let course of (allCourses | async)" [@courseHover]="course.hover" (mouseenter)="course.hover='active'"
+      (mouseleave)="course.hover='inactive'">
     <td class="column course-icon">
       <img [src]="course?.iconUrl">
     </td>
