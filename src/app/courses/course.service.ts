@@ -111,6 +111,18 @@ export class CourseService {
       .map(Lesson.fromJsonList);
   }
 
+  findLessonByUrl(url){
+    return this.db.list('lessons', {
+      query: {
+        orderByChild: 'url',
+        equalTo: url
+      }
+    })
+    .filter(r => !!r)
+    .do(console.log)
+    .map(res => res[0])
+  }
+
   addCourse(course) {
     return this.courses$.push(course)
       .then(

@@ -1,11 +1,11 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async } from '@angular/core/testing';
-import { AuxrouteComponent } from './auxroute.component';
+import { LessonDetailComponent } from './lesson-detail.component';
 
-describe('Component: Auxroute', () => {
+describe('Component: LessonDetail', () => {
   it('should create an instance', () => {
-    let component = new AuxrouteComponent();
+    let component = new LessonDetailComponent();
     expect(component).toBeTruthy();
   });
 });
