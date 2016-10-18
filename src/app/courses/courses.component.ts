@@ -19,11 +19,10 @@ import {Course} from "./courses";
         backgroundColor: '#cfd8dc',
         transform: 'scale(1.1)'
       })),
-      transition('inactive => active', animate('100ms ease-in')),
-      transition('active => inactive', animate('100ms ease-out'))
+      transition('inactive => active', animate('300ms ease-in')),
+      transition('active => inactive', animate('300ms ease-out'))
     ])
   ]
-
 })
 export class CoursesComponent implements OnInit {
 
