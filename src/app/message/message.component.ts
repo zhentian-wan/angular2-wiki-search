@@ -51,4 +51,10 @@ export class MessageComponent implements OnInit {
       })
 
   }
+
+  legendStyle(obj){
+    return {
+      color: obj.dirty && obj.invalid ? 'red': 'black'
+    }
+  }
 }

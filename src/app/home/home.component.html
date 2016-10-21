@@ -3,6 +3,7 @@
 </md-toolbar>
 <search-bar (searchResult)="items = $event" (details)="urls = $event"></search-bar>
 <result-list [keys]="items" [urls]="urls" class="list">
-  Search Result
+  <div class="header">Search result: </div>
+  <footer>End...</footer>
 </result-list>
 
