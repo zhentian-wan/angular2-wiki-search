@@ -24,8 +24,8 @@
   <br>
   <hr>
   <form name="myForm2" #formRef2="ngForm" (ngSubmit)="onSubmit(formRef2.value)">
-    <fieldset ngModelGroup="login">
-      <legend>Login:</legend>
+    <fieldset ngModelGroup="login" #login="ngModelGroup">
+      <legend [ngStyle]="legendStyle(login)">Login:</legend>
 
       Username: <input type="text" name="username" #usernameRef="ngModel" ngModel required>
       Password: <input type="password" name="password" #passwordRef="ngModel" ngModel required>
