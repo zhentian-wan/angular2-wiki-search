@@ -1,3 +1,21 @@
+<h1>
+  reactive form
+</h1>
+<form [formGroup]="reactiveForm" novalidate autocomplete="off">
+  <div class="form-fidle">
+    <label>Title:</label>
+    <input formControlName="title">
+  </div>
+  <div class="form-fidle">
+    <label>Description:</label>
+    <input formControlName="description">
+  </div>
+  <div class="form-fidle">
+    <button type="submit">Submit</button>
+  </div>
+</form>
+
+<h1>Template form</h1>
 <section>
   Min length & required: <input type="text" [(ngModel)]="message" #messageRef="ngModel" required minlength="5">
   <pre>
