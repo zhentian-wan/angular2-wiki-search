@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Observable} from 'rxjs';
+import {FormBuilder, Validators, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-message',
@@ -13,8 +14,24 @@ export class MessageComponent implements OnInit {
   message = "Hello";
   answer: string;
   locations: Array<string>;
+  reactiveForm: FormGroup;
 
-  constructor() {
+
+  constructor(fb: FormBuilder) {
+    this.reactiveForm = fb.group({
+      // title <-- formControlName="title"
+      title: [
+        'Title', // <-- Default value
+        [
+          Validators.required,
+          Validators.minLength(3)
+        ] // <-- Validations
+      ],
+      description: [
+        'Description',
+        [Validators.required]
+      ]
+    })
   }
 
   ngOnInit() {

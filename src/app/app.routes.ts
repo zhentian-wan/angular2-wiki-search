@@ -9,7 +9,7 @@ const routes = [
   {path: 'home', loadChildren: 'app/home/home.module', name: 'Home'},
   {path: 'heros', loadChildren: 'app/heros/heros.module', name: 'Heros', data: {preload: true}},
   {path: 'contact', loadChildren: 'app/contact/contact.module', name: 'Contact', data: {preload: true}},
-  {path: 'message', loadChildren: 'app/message/message.module', name: 'Message'},
+  {path: 'forms', loadChildren: 'app/message/message.module', name: 'Form'},
   {path: 'playground', loadChildren: 'app/playground/playground.module', name: 'Playground'},
   {path: 'realtime', loadChildren: 'app/realtime/realtime.module', name: 'Realtime'},
   {path: 'courses', loadChildren: 'app/courses/courses.module', name: 'Courses'},
