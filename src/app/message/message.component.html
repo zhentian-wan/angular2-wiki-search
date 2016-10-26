@@ -2,18 +2,32 @@
   reactive form
 </h1>
 <form [formGroup]="reactiveForm" novalidate autocomplete="off">
-  <div class="form-fidle">
+  <div class="form-field">
     <label>Title:</label>
     <input formControlName="title">
+    <div class="field-error-message" *ngIf="reactiveForm.controls.title.errors?.required">
+      Title is required
+    </div>
   </div>
-  <div class="form-fidle">
+  <div class="form-field">
+    <label>Duration:</label>
+    <input formControlName="duration">
+  </div>
+  <div class="form-field">
     <label>Description:</label>
     <input formControlName="description">
   </div>
-  <div class="form-fidle">
+  <div class="form-field">
+    <label>Extra</label>
+    <input [formControl]="extra">
+  </div>
+  <div class="form-field">
     <button type="submit">Submit</button>
   </div>
 </form>
+<pre>
+  {{video | json}}
+</pre>
 
 <h1>Template form</h1>
 <section>

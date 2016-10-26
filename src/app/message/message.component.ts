@@ -1,6 +1,17 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Observable} from 'rxjs';
-import {FormBuilder, Validators, FormGroup} from "@angular/forms";
+import {FormBuilder, Validators, FormGroup, FormControl} from "@angular/forms";
+
+
+class Video {
+  constructor(
+    private title: string,
+    private duration: number,
+    private description: string
+  ){
+
+  }
+}
 
 @Component({
   selector: 'app-message',
@@ -15,9 +26,15 @@ export class MessageComponent implements OnInit {
   answer: string;
   locations: Array<string>;
   reactiveForm: FormGroup;
-
+  video: Video;
+  extra: FormControl;
 
   constructor(fb: FormBuilder) {
+
+    this.extra = new FormControl('...', [
+      Validators.maxLength(100)
+    ]);
+
     this.reactiveForm = fb.group({
       // title <-- formControlName="title"
       title: [
@@ -27,11 +44,30 @@ export class MessageComponent implements OnInit {
           Validators.minLength(3)
         ] // <-- Validations
       ],
+      duration: [
+        0,
+        [
+          Validators.required,
+          Validators.pattern('[0-9]+')
+        ]
+      ],
+      extra: this.extra,
       description: [
         'Description',
         [Validators.required]
       ]
-    })
+    });
+
+
+
+
+    this.reactiveForm.valueChanges
+      .filter( x => this.reactiveForm.valid)
+      .map(value => new Video(value.title, value.duration, value.description))
+      //.do(formValue => console.log(formValue))
+      .subscribe((video) => {
+        this.video = video;
+      })
   }
 
   ngOnInit() {
