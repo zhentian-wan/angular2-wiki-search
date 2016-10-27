@@ -1,0 +1,33 @@
+.animations-section{
+  display:flex;
+}
+.left, .right{
+  height: 100%;
+}
+.left{
+  flex: 1;
+  background: lavender;
+}
+.right {
+  flex: 1;
+  background: lightcyan;
+}
+
+.methods-section{
+
+}
+.demo{
+
+}
+ul{
+  list-style: none;
+}
+ul li{
+  height: 20px;
+  width: 100px;
+  display: block;
+  background: lightblue;
+  border: 1px solid deepskyblue;
+  padding: 10px;
+  margin: 10px;
+}

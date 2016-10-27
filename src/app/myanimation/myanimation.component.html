@@ -1,0 +1,39 @@
+<h1>http://easings.net/</h1>
+<section class="animations-section">
+
+  <div class="left">
+    <h3>Animation methods</h3>
+    <section class="methods-section">
+      <div>
+        <h4>Move from right to left</h4>
+        <button (click)="onToggle()">Toggle: {{moveStyle}}</button>
+      </div>
+      <div>
+        <h4>easeInSine</h4>
+        <button (click)="setMoveStyle('easeInSine')">easeInSine</button>
+      </div>
+      <div>
+        <h4>easeOutElastic</h4>
+        <button (click)="setMoveStyle('easeInOutBack')">easeInOutBack</button>
+      </div>
+      <div>
+        <h4>easeOutBack</h4>
+        <button (click)="setMoveStyle('easeOutBack')">easeOutBack</button>
+      </div>
+      <div>
+        <h4>easeInBack</h4>
+        <button (click)="setMoveStyle('easeInBack')">easeInBack</button>
+      </div>
+    </section>
+  </div>
+  <div class="right">
+    <h3>DEMO</h3>
+    <section class="demo">
+      <ul>
+        <li
+          [@move]="moveStyle"
+          *ngFor="let item of [1,2,3,4,5,6]">{{item}}</li>
+      </ul>
+    </section>
+  </div>
+</section>
