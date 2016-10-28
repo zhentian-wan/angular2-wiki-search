@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MessageComponent } from './message.component';
 import messageRoutes from './message.routes';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {DurationValidator} from "./duration-validator";
 
 @NgModule({
   imports: [
@@ -11,6 +12,6 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     ReactiveFormsModule,
     messageRoutes
   ],
-  declarations: [MessageComponent]
+  declarations: [MessageComponent, DurationValidator]
 })
 export default class MessageModule { }
