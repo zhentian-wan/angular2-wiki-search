@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Observable} from 'rxjs';
 import {FormBuilder, Validators, FormGroup, FormControl} from "@angular/forms";
+import {validateDuration} from "./validateDuration";
 
 
 class Video {
@@ -48,7 +49,8 @@ export class MessageComponent implements OnInit {
         0,
         [
           Validators.required,
-          Validators.pattern('[0-9]+')
+          //Validators.pattern('[0-9]+'),
+          validateDuration
         ]
       ],
       extra: this.extra,

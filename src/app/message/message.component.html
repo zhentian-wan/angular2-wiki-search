@@ -12,6 +12,9 @@
   <div class="form-field">
     <label>Duration:</label>
     <input formControlName="duration">
+    <div *ngIf="reactiveForm.controls.duration.errors?.validateDuration">
+       {{reactiveForm.controls.duration.errors?.validateDuration.message}}
+    </div>
   </div>
   <div class="form-field">
     <label>Description:</label>
