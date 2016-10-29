@@ -60,9 +60,6 @@ export class MessageComponent implements OnInit {
       ]
     });
 
-
-
-
     this.reactiveForm.valueChanges
       .filter( x => this.reactiveForm.valid)
       .map(value => new Video(value.title, value.duration, value.description))
@@ -70,6 +67,25 @@ export class MessageComponent implements OnInit {
       .subscribe((video) => {
         this.video = video;
       })
+  }
+
+  partialUpdate(){
+    this.reactiveForm.patchValue({
+      title: 'updatedTitle'
+    })
+  }
+
+  fullUpdate(){
+    this.reactiveForm.setValue({
+      title: "Full updated title",
+      description: "Full updated description",
+      duration: 0,
+      extra: "Extra"
+    })
+  }
+
+  reset(){
+    this.reactiveForm.reset();
   }
 
   ngOnInit() {

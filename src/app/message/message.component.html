@@ -27,6 +27,10 @@
   <div class="form-field">
     <button type="submit">Submit</button>
   </div>
+
+  <button (click)="partialUpdate()">update title</button>
+  <button (click)="fullUpdate()">update all</button>
+  <button (click)="reset()">resset</button>
 </form>
 <pre>
   {{video | json}}
