@@ -1,7 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Observable} from 'rxjs';
-import {FormBuilder, Validators, FormGroup, FormControl} from "@angular/forms";
+import {FormBuilder, Validators, FormGroup, FormControl, Validator} from "@angular/forms";
 import {validateDuration} from "./validateDuration";
+import {confirmPasswords} from "./confirmPasswords";
 
 
 class Video {
@@ -27,8 +28,10 @@ export class MessageComponent implements OnInit {
   answer: string;
   locations: Array<string>;
   reactiveForm: FormGroup;
+  signupForm: FormGroup;
   video: Video;
   extra: FormControl;
+  signup = {};
 
   constructor(fb: FormBuilder) {
 
@@ -36,10 +39,25 @@ export class MessageComponent implements OnInit {
       Validators.maxLength(100)
     ]);
 
+    this.signupForm = fb.group({
+      password: [
+        '',
+        Validators.required
+      ],
+      confirm: [
+        '',
+        [
+          Validators.required,
+          confirmPasswords.bind(undefined, this.signup)
+        ]
+      ]
+    });
+
+
     this.reactiveForm = fb.group({
       // title <-- formControlName="title"
       title: [
-        'Title', // <-- Default value
+        '', // <-- Default value
         [
           Validators.required,
           Validators.minLength(3)

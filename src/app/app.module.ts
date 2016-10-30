@@ -11,9 +11,15 @@ import appRoutes from './app.routes';
 import {APP_BASE_HREF} from "@angular/common";
 import {NotFoundComponent} from './shared-components/not-found/not-found.component';
 import {firebaseConfig} from "../environments/firebase.config";
-import {AngularFireModule} from "angularfire2";
+import {AngularFireModule, AuthMethods, AuthProviders} from "angularfire2";
 import {PreloadSelectedModuledsList} from "./shared/preload-router-list";
+import {SignupComponent} from "./signup/signup.component";
+import SignupModule from "./signup/signup.module";
 
+const firebaseAuthConfig = {
+  method: AuthMethods.Popup,
+  remember: 'default'
+};
 
 @NgModule({
   declarations: [
@@ -28,7 +34,7 @@ import {PreloadSelectedModuledsList} from "./shared/preload-router-list";
     HttpModule,
     JsonpModule,
     SharedServiceModule.forRoot(),
-    AngularFireModule.initializeApp(firebaseConfig)
+    AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig),
   ],
   providers: [
     {provide: APP_BASE_HREF, useValue: '/'},

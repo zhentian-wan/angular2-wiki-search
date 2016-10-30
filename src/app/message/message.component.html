@@ -1,3 +1,21 @@
+<h1>password match</h1>
+<form novalidate autocomplete="off" [formGroup]="signupForm">
+  <div class="form-field">
+    <label>Password:</label>
+    <input type="text" formControlName="password" [(ngModel)]="signup.password" name="password">
+  </div>
+  <div class="form-field">
+    <label>Confirm Password: </label>
+    <input type="text" formControlName="confirm" [(ngModel)]="signup.confirm" name="confrim">
+    <div *ngIf="!signupForm.valid">
+      <span *ngIf="signupForm.get('confirm').hasError('confirmPassword') && signupForm.get('confirm').touched">
+        {{signupForm.get('confirm').errors?.confirmPassword.message}}
+      </span>
+      <span *ngIf="signupForm.get('confirm').hasError('required') && signupForm.get('confirm').dirty">This field is requred</span>
+    </div>
+  </div>
+</form>
+
 <h1>
   reactive form
 </h1>

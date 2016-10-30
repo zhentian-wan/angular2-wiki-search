@@ -1,4 +1,4 @@
-<nav>
+<nav *ngIf="auth.authenticated">
   <a [routerLink]="['/home']"
      routerLinkActive="active"
      [routerLinkActiveOptions]="{exact: true}">Home</a>
@@ -36,8 +36,7 @@
     routerLinkActive="active"
   >legacy-url/1 -- prefix matching</a>-->
 </nav>
-
-
-<router-outlet class="main"></router-outlet>
+<router-outlet class="main">
+</router-outlet>
 <router-outlet name="wiki" class="right-detail"></router-outlet>
 

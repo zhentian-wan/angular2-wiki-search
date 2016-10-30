@@ -2,6 +2,7 @@
 import {NgModule} from "@angular/core/src/metadata/ng_module";
 import {WikiSearchService} from "./wiki-search.service";
 import {RealtimeService} from "./realtime.service";
+import {AuthService} from "./auth/AuthService";
 @NgModule({})
 export class SharedServiceModule{
   static forRoot(){
@@ -9,7 +10,8 @@ export class SharedServiceModule{
       ngModule: SharedServiceModule,
       providers: [
         WikiSearchService,
-        RealtimeService
+        RealtimeService,
+        AuthService
       ]
     }
   }
@@ -17,5 +19,6 @@ export class SharedServiceModule{
 
 export {
   WikiSearchService,
-  RealtimeService
+  RealtimeService,
+  AuthService
 }
