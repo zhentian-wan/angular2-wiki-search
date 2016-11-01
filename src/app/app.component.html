@@ -1,42 +1,60 @@
-<nav *ngIf="auth.authenticated">
-  <a [routerLink]="['/home']"
-     routerLinkActive="active"
-     [routerLinkActiveOptions]="{exact: true}">Home</a>
-  <a
-    [routerLink]="['/heros', {outlets: {'wiki': null}}]"
-    routerLinkActive="active"
-    [routerLinkActiveOptions]="{exact: true}"
-  >Heros</a>
-  <a
-    [routerLink]="['/contact']"
-    routerLinkActive="active"
-  >Contact</a>
-  <a
-    [routerLink]="['/forms']"
-    routerLinkActive="active"
-  >forms</a>
-  <a
-    [routerLink]="['/playground']"
-    routerLinkActive="active"
-  >Playground</a>
-  <a
-    [routerLink]="['/courses']"
-    routerLinkActive="active"
-  >Courses</a>
-  <a
-    [routerLink]="['/animation']"
-    routerLinkActive="active"
-  >Animation</a>
-  <!--<a
-    [routerLink]="'/randome'"
-    routerLinkActive="active"
-  >random</a>-->
-  <!--<a
-    [routerLink]="'/legacy-url/1'"
-    routerLinkActive="active"
-  >legacy-url/1 -- prefix matching</a>-->
-</nav>
-<router-outlet class="main">
-</router-outlet>
-<router-outlet name="wiki" class="right-detail"></router-outlet>
+<md-toolbar color="primary">
+  <md-icon class="main-icon">
+    stars
+  </md-icon>
+  Angular2 Learning Demo
+</md-toolbar>
+<md-sidenav-layout>
+  <md-sidenav align="start" mode="side" opened>
+    <md-list>
+      <md-list-item>
+        <a [routerLink]="['/home']"
+           routerLinkActive="active"
+           [routerLinkActiveOptions]="{exact: true}">Home</a>
+      </md-list-item>
+      <md-list-item>
+        <a
+          [routerLink]="['/heros', {outlets: {'wiki': null}}]"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact: true}"
+        >Heros</a>
+      </md-list-item>
+      <md-list-item>
+        <a
+          [routerLink]="['/forms']"
+          routerLinkActive="active"
+        >forms</a>
+      </md-list-item>
+      <md-list-item>
+        <a
+          [routerLink]="['/playground']"
+          routerLinkActive="active"
+        >Playground</a>
+      </md-list-item>
+      <md-list-item>
+        <a
+          [routerLink]="['/courses']"
+          routerLinkActive="active"
+        >Courses</a>
+      </md-list-item>
+      <md-list-item>
+        <a
+          [routerLink]="['/animation']"
+          routerLinkActive="active"
+        >Animation</a>
+      </md-list-item>
+      <md-list-item>
+        <a
+          [routerLink]="['/contact']"
+          routerLinkActive="active"
+        >Contact</a>
+      </md-list-item>
+    </md-list>
+  </md-sidenav>
+  <div class="main-content">
+    <router-outlet class="main"></router-outlet>
+    <router-outlet name="wiki" class="right-detail"></router-outlet>
+  </div>
+</md-sidenav-layout>
+
 

@@ -13,6 +13,10 @@ a.active{
   height: 100%;
 }
 
+.main-icon{
+  padding: 0 10px;
+}
+
 .right-detail{
   width: 30%;
   height: 100%;

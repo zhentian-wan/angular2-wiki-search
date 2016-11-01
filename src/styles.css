@@ -1,1 +1,24 @@
-/* You can add global styles to this file, and also import other style files */
+@import '~https://fonts.googleapis.com/icon?family=Material+Icons';
+@import '~@angular/material/core/theming/prebuilt/deeppurple-amber.css';
+
+body {
+  margin: 0;
+  font-family: Roboto, sans-serif;
+}
+
+md-sidenav-layout {
+  height: 100vh;
+}
+
+md-sidenav {
+  width: 320px;
+}
+
+.main-content{
+  padding: 10px;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
