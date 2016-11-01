@@ -1,0 +1,9 @@
+
+:host {
+  display: block;
+}
+
+.selected {
+  background: black;
+  color: white;
+}

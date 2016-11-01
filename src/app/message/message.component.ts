@@ -1,9 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Observable} from 'rxjs';
-import {FormBuilder, Validators, FormGroup, FormControl, Validator} from "@angular/forms";
+import {FormBuilder, Validators, FormGroup, FormControl, Validator, AbstractControl} from "@angular/forms";
 import {validateDuration} from "./validateDuration";
 import {confirmPasswords} from "./confirmPasswords";
-
 
 class Video {
   constructor(
@@ -13,6 +12,14 @@ class Video {
   ){
 
   }
+}
+
+function passwordValidator(c: AbstractControl){
+  return c.get('pwd').value === c.get('rpwd').value ?
+    null :
+    {
+      nomatch: true
+    }
 }
 
 @Component({
@@ -50,7 +57,8 @@ export class MessageComponent implements OnInit {
           Validators.required,
           confirmPasswords.bind(undefined, this.signup)
         ]
-      ]
+      ],
+      newsletter: true
     });
 
 
@@ -75,7 +83,11 @@ export class MessageComponent implements OnInit {
       description: [
         'Description',
         [Validators.required]
-      ]
+      ],
+      pwds: fb.group({
+        pwd: '',
+        rpwd: ''
+      }, {validator: passwordValidator})
     });
 
     this.reactiveForm.valueChanges

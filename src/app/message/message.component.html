@@ -13,8 +13,13 @@
       </span>
       <span *ngIf="signupForm.get('confirm').hasError('required') && signupForm.get('confirm').dirty">This field is requred</span>
     </div>
+    <switch-control formControlName="newsletter"></switch-control>
   </div>
 </form>
+
+<pre>
+  {{signupForm.get('newsletter').value | json}}
+</pre>
 
 <h1>
   reactive form
@@ -42,6 +47,16 @@
     <label>Extra</label>
     <input [formControl]="extra">
   </div>
+  <div formGroupName="pwds">
+    <div class="form-field">
+      <label>pwd</label>
+      <input formControlName="pwd">
+    </div>
+    <div class="form-field">
+      <label>rpwd</label>
+      <input formControlName="rpwd">
+    </div>
+  </div>
   <div class="form-field">
     <button type="submit">Submit</button>
   </div>
@@ -52,6 +67,8 @@
 </form>
 <pre>
   {{video | json}}
+  {{reactiveForm.get('pwds')?.value | json}}
+  {{reactiveForm.get('pwds')?.errors | json}}
 </pre>
 
 <h1>Template form</h1>
