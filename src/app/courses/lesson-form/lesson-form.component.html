@@ -1,0 +1,27 @@
+<form autocomplete="off" novalidate [formGroup]="form">
+  <div class="form-field">
+    <label>Lesson title: </label>
+    <input type="text" formControlName="title">
+    <span style="color: red" *ngIf="form.get('title').dirty && form.get('title').hasError('required')">Field required</span>
+  </div>
+  <div class="form-field">
+    <label>Lesson Url: </label>
+    <input type="text" formControlName="lessonUrl">
+    <span style="color: red" *ngIf="form.get('lessonUrl').dirty && form.get('lessonUrl').hasError('required')">Field required</span>
+  </div>
+  <div class="form-field">
+    <label>Video Url: </label>
+    <input type="text" formControlName="videoUrl">
+    <span style="color: red" *ngIf="form.get('tags').dirty && form.get('videoUrl').hasError('required')">Field required</span>
+  </div>
+  <div class="form-field">
+    <label>Tags: </label>
+    <input type="text" formControlName="tags">
+    <span style="color: red" *ngIf="form.get('tags').dirty && form.get('tags').hasError('required')">Field required</span>
+  </div>
+  <div class="form-field">
+    <label>Long Description: </label>
+    <input type="text" formControlName="longDescription">
+    <span style="color: red" *ngIf="form.get('longDescription').dirty && form.get('longDescription').hasError('required')">Field required</span>
+  </div>
+</form>

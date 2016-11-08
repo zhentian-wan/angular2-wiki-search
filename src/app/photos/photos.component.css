@@ -1,0 +1,29 @@
+.photos-section {
+  display: flex;
+}
+
+.left, .right {
+  flex: 1;
+}
+
+.img{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('https://unsplash.it/500/500?image=1020');
+  background-color: indigo;
+  /*background-blend-mode: exclusion;*/
+  width: 500px; height: 500px;
+}
+
+.img p{
+  position: absolute;
+  font-size: 6rem;
+  text-align: center;
+  letter-spacing: -10px;
+  line-height: .75;
+  font-family: sans-serif;
+  font-weight: bold;
+  color: coral;
+  mix-blend-mode: color-dodge;
+}

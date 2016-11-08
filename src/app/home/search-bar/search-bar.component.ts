@@ -1,4 +1,4 @@
-import {Component, OnInit, EventEmitter, Output, OnDestroy} from '@angular/core';
+import {Component, OnInit, EventEmitter, Output, OnDestroy, ViewEncapsulation} from '@angular/core';
 import {Subject, Observable, Subscription} from 'rxjs';
 import {WikiSearchService} from "../../shared";
 import {Router} from "@angular/router";
@@ -6,7 +6,9 @@ import {Router} from "@angular/router";
 @Component({
   selector: 'search-bar',
   templateUrl: 'search-bar.component.html',
-  styleUrls: ['search-bar.component.css']
+  styleUrls: ['search-bar.component.css'],
+  encapsulation: ViewEncapsulation.Native
+
 })
 export class SearchBarComponent implements OnInit, OnDestroy {
 

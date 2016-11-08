@@ -1,0 +1,17 @@
+<section class="photos-section">
+  <div class="left">
+    <form novalidate autocomplete="off" [formGroup]="filtersForm">
+      <input type="checkbox" id="hue-rotate" formControlName="hue-rotate"><label for="hue-rotate">hue-rotate</label>
+      <input type="checkbox" id="sepia" formControlName="sepia"><label for="sepia">sepia</label>
+      <input type="checkbox" id="saturate" formControlName="saturate"><label for="saturate">saturate</label>
+      <input type="checkbox" id="contrast" formControlName="contrast"><label for="contrast">contrast</label>
+    </form>
+  </div>
+  <div class="right">
+    <div class="img" [ngStyle]="{filter: appliedFiters}">
+      <p>
+        Angular2 is great
+      </p>
+    </div>
+  </div>
+</section>

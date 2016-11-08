@@ -14,6 +14,7 @@ const routes = [
   {path: 'playground', loadChildren: 'app/playground/playground.module', name: 'Playground'},
   {path: 'realtime', loadChildren: 'app/realtime/realtime.module', name: 'Realtime'},
   {path: 'courses', loadChildren: 'app/courses/courses.module', name: 'Courses'},
+  {path: 'photos', loadChildren: 'app/photos/photos.module', name: 'Photos'},
   {path: 'animation', loadChildren: 'app/myanimation/myanimation.module', name: 'Animation', data:{preload: true}},
   indexRoute,
   fallbackRoute,
