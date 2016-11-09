@@ -22,4 +22,12 @@ export class LessonFormComponent implements OnInit {
   ngOnInit() {
   }
 
+  reset(){
+    this.form.reset();
+  }
+
+  get value(){
+    return this.form.value;
+  }
+
 }

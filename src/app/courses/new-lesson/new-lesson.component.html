@@ -1,5 +1,5 @@
 <section>
   <h2>{{courseId}}</h2>
-  <app-lesson-form></app-lesson-form>
-  <button md-button color="primary">Save</button>
+  <app-lesson-form #form></app-lesson-form>
+  <button md-button color="primary" (click)="save(form)">Save</button>
 </section>

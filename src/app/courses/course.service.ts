@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
+import {Injectable, Inject} from '@angular/core';
 import {RealtimeService} from "../shared";
-import {FirebaseListObservable, AngularFire, FirebaseDatabase} from "angularfire2";
+import {FirebaseListObservable, AngularFire, FirebaseDatabase, FirebaseRef} from "angularfire2";
 import {Lesson} from "./lessons/lessons";
 import {Course} from "./courses";
-import {Observable} from "rxjs";
+import {Observable, Subject} from "rxjs";
 
 @Injectable()
 export class CourseService {
@@ -12,8 +12,12 @@ export class CourseService {
   lessons$: FirebaseListObservable<Lesson[]>;
   db: FirebaseDatabase;
   public lastCourse: any;
+  rootDb: any;
 
-  constructor(private rt: RealtimeService) {
+  constructor(private rt: RealtimeService, @Inject(FirebaseRef) fb) {
+
+    this.rootDb = fb.database().ref(); // To get the root firebase ref
+
     this.courses$ = rt.getCourseObs();
     this.lessons$ = rt.getLessonObs();
     this.db = rt.getDb();
@@ -154,6 +158,29 @@ export class CourseService {
           this.lastCourse = courses[courses.length - 1]
         }
       )
+  }
+
+  createNewLesson(courseId: string, lesson: Lesson): Observable<any>{
+    const lessonToSave = Object.assign({}, lesson, {courseId});
+
+    // Generate a new key under 'lessons' collection, db won't change currently
+    const newLessonKey = this.rootDb.child('lessons').push().key;
+
+    const dataToSave = {};
+    dataToSave[`lessons/${newLessonKey}`] = lessonToSave;
+    dataToSave[`lessonsPerCourse/${courseId}/${newLessonKey}`] = true;
+
+
+    const subject = new Subject();
+    this.rootDb.update(dataToSave)
+      .then( (val) => {
+        subject.next(val);
+        subject.complete();
+      }, (err) => {
+        subject.error(err);
+        subject.complete();
+      });
+    return subject.asObservable();
   }
 
 }
