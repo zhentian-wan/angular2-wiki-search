@@ -12,7 +12,8 @@
   <div class="form-field">
     <label>Video Url: </label>
     <input type="text" formControlName="videoUrl">
-    <span style="color: red" *ngIf="form.get('tags').dirty && form.get('videoUrl').hasError('required')">Field required</span>
+    <span style="color: red" *ngIf="form.get('videoUrl').dirty && form.get('videoUrl').hasError('required')">Field required</span>
+    <span style="color: red" *ngIf="form.get('videoUrl').dirty && form.get('videoUrl').hasError('url')">{{form.get('videoUrl').errors?.url.message}}</span>
   </div>
   <div class="form-field">
     <label>Tags: </label>
