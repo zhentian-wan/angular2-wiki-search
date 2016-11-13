@@ -18,6 +18,6 @@
 <p>{{ lesson?.longDescription }}</p>
 
 <div class="tools-bar">
-  <button routerLink="edit">Edit Lesson</button>
+  <button [routerLink]="['edit']">Edit Lesson</button>
   <button (click)="requestLessonDeletion()">Delete</button>
 </div>

@@ -10,6 +10,7 @@ import {SafeUrlPipe} from "../shared/pipes/safe-url.pipe";
 import {NewLessonComponent} from './new-lesson/new-lesson.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {LessonFormComponent} from "./lesson-form/lesson-form.component";
+import { EditLessonComponent } from './edit-lesson/edit-lesson.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import {LessonFormComponent} from "./lesson-form/lesson-form.component";
     LessonDetailComponent,
     SafeUrlPipe,
     LessonFormComponent,
-    NewLessonComponent],
+    NewLessonComponent,
+    EditLessonComponent],
   providers: [
     CourseService
   ]
