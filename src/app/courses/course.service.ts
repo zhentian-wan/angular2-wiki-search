@@ -116,15 +116,14 @@ export class CourseService {
   }
 
   findLessonByUrl(url){
-    return this.db.list('lessons', {
+     return this.db.list('lessons', {
       query: {
         orderByChild: 'url',
         equalTo: url
       }
     })
     .filter(r => !!r)
-    .do(console.log)
-    .map(res => res[0])
+    .map(res => res[0]);
   }
 
   addCourse(course) {

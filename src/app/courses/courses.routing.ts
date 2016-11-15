@@ -4,6 +4,7 @@ import {LessonsComponent} from "./lessons/lessons.component";
 import {LessonDetailComponent} from "./lesson-detail/lesson-detail.component";
 import {NewLessonComponent} from "./new-lesson/new-lesson.component";
 import {EditLessonComponent} from "./edit-lesson/edit-lesson.component";
+import {LessonDataResolver} from "./edit-lesson/lessonDataResolver";
 
 export const coursesRoutes: Routes = [
   {path: '', component: CoursesComponent},
@@ -13,7 +14,9 @@ export const coursesRoutes: Routes = [
   ]},
   {path: ':url/:id', children: [
     {path: '', component: LessonDetailComponent},
-    {path: 'edit', component: EditLessonComponent}
+    {path: 'edit', component: EditLessonComponent, resolve: {
+      lesson: LessonDataResolver
+    }}
   ]},
 ];
 

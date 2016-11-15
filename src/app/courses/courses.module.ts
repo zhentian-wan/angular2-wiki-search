@@ -11,6 +11,7 @@ import {NewLessonComponent} from './new-lesson/new-lesson.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {LessonFormComponent} from "./lesson-form/lesson-form.component";
 import { EditLessonComponent } from './edit-lesson/edit-lesson.component';
+import {LessonDataResolver} from "./edit-lesson/lessonDataResolver";
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import { EditLessonComponent } from './edit-lesson/edit-lesson.component';
     NewLessonComponent,
     EditLessonComponent],
   providers: [
-    CourseService
+    CourseService,
+    LessonDataResolver
   ]
 })
 export default class CoursesModule {

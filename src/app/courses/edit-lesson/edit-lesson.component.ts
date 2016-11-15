@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute} from "@angular/router";
+import {Lesson} from "../lessons/lessons";
 
 @Component({
   selector: 'app-edit-lesson',
@@ -7,7 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditLessonComponent implements OnInit {
 
-  constructor() { }
+  lesson: Lesson;
+  constructor(private route: ActivatedRoute) {
+    route.data
+      .subscribe(
+      (data) => {
+        this.lesson = data['lesson']
+      }
+    )
+  }
 
   ngOnInit() {
   }

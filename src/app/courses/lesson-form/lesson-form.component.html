@@ -1,13 +1,13 @@
 <form autocomplete="off" novalidate [formGroup]="form">
   <div class="form-field">
     <label>Lesson title: </label>
-    <input type="text" formControlName="title">
-    <span style="color: red" *ngIf="form.get('title').dirty && form.get('title').hasError('required')">Field required</span>
+    <input type="text" formControlName="description">
+    <span style="color: red" *ngIf="form.get('description').dirty && form.get('description').hasError('required')">Field required</span>
   </div>
   <div class="form-field">
     <label>Lesson Url: </label>
-    <input type="text" formControlName="lessonUrl">
-    <span style="color: red" *ngIf="form.get('lessonUrl').dirty && form.get('lessonUrl').hasError('required')">Field required</span>
+    <input type="text" formControlName="url">
+    <span style="color: red" *ngIf="form.get('url').dirty && form.get('url').hasError('required')">Field required</span>
   </div>
   <div class="form-field">
     <label>Video Url: </label>

@@ -13,7 +13,8 @@ export class HeroDetailResolver implements Resolve<any> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | any{
     const id= route.params['id'];
-    return this.startWarsService.getPersonDetail(id); // How to prevent been called multi times for the same id
+    return this.startWarsService.getPersonDetail(id);
+    // How to prevent been called multi times for the same id
   }
 
 }
