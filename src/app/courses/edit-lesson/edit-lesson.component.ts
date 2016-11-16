@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute} from "@angular/router";
 import {Lesson} from "../lessons/lessons";
+import {CourseService} from "../course.service";
 
 @Component({
   selector: 'app-edit-lesson',
@@ -9,20 +10,29 @@ import {Lesson} from "../lessons/lessons";
 })
 export class EditLessonComponent implements OnInit {
 
-  lesson: Lesson;
-  constructor(private route: ActivatedRoute) {
-    route.data
-      .subscribe(
-      (data) => {
-        this.lesson = data['lesson']
-      }
-    )
+  lesson: Lesson = {};
+  constructor(
+    private courseService: CourseService,
+    private route: ActivatedRoute
+  ) {
+
   }
 
   ngOnInit() {
+    this.route.data
+      .subscribe(
+        (res) => {
+          this.lesson = res['lesson'];
+        }
+      )
   }
 
-  save(){
-
+  save(updates){
+    if(this.lesson) {
+      this.courseService.updateLesson(this.lesson, updates)
+        .then(() => {
+          console.log("updated successfully");
+        })
+    }
   }
 }

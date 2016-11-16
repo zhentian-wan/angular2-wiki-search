@@ -12,7 +12,7 @@ export class LessonFormComponent implements OnInit, OnChanges {
 
 
   form: FormGroup;
-  @Input() initialData: Lesson;
+  @Input() initialData;
   constructor(private fb: FormBuilder) {
     this.form = fb.group({
       description: ['', Validators.required],
@@ -24,14 +24,16 @@ export class LessonFormComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(changes['initialData']){
+   if(changes['initialData']){
+      console.log("changes['initialData']", JSON.stringify(changes['initialData'], null, 2))
       if(this.form && changes.initialData.currentValue){
         this.form.patchValue(changes.initialData.currentValue)
       }
-    }
+   }
   }
 
   ngOnInit() {
+
   }
 
   reset(){
@@ -39,6 +41,9 @@ export class LessonFormComponent implements OnInit, OnChanges {
   }
 
   get value(){
+    return this.form.value;
+  }
+  get formValue(){
     return this.form.value;
   }
 

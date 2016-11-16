@@ -14,10 +14,10 @@ export const coursesRoutes: Routes = [
   ]},
   {path: ':url/:id', children: [
     {path: '', component: LessonDetailComponent},
-    {path: 'edit', component: EditLessonComponent, resolve: {
-      lesson: LessonDataResolver
-    }}
-  ]},
+    {path: 'edit', component: EditLessonComponent}
+  ], resolve: {
+    lesson: LessonDataResolver
+  }},
 ];
 
 export const coursesRouting = RouterModule.forChild(coursesRoutes);

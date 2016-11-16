@@ -1,4 +1,4 @@
 <section>
-  <app-lesson-form [initialData]="lesson"></app-lesson-form>
-  <button (click)="save()">Save</button>
+  <app-lesson-form [initialData]="lesson" #form></app-lesson-form>
+  <button (click)="save(form.formValue)">Save</button>
 </section>

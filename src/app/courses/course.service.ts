@@ -46,7 +46,7 @@ export class CourseService {
       }));
   }
 
-  findPreviousPageLessonsKey(courseUrl: string, end: Lesson, limit: number){
+  findPreviousPageLessonsKey(courseUrl: string, end: Lesson, limit: number) {
     return this.findCourseByUrl(courseUrl)
       .filter(c => !!c)
       .switchMap((c) => this.db.list(`lessonsPerCourse/${c.$key}`, {
@@ -56,10 +56,10 @@ export class CourseService {
           endAt: end.$key
         }
       }))
-      .map(lessons => lessons.slice(0, lessons.length-1));
+      .map(lessons => lessons.slice(0, lessons.length - 1));
   }
 
-  findPreviousPageLessons(courseUrl: string, end: Lesson, limit: number){
+  findPreviousPageLessons(courseUrl: string, end: Lesson, limit: number) {
     return this.findPreviousPageLessonsKey(courseUrl, end, limit)
       .map((lessonKeys) => lessonKeys
         .map((lessonKey) => {
@@ -70,7 +70,7 @@ export class CourseService {
       });
   }
 
-  findNextPageLessons(courseUrl: string, from: Lesson, limit: number): Observable<Lesson[]>{
+  findNextPageLessons(courseUrl: string, from: Lesson, limit: number): Observable<Lesson[]> {
     return this.findNextPageLessonsKey(courseUrl, from, limit)
       .map((lessonKeys) => lessonKeys
         .map((lessonKey) => {
@@ -81,7 +81,7 @@ export class CourseService {
       });
   }
 
-  findNextPageLessonsKey(courseUrl: string, from: Lesson, limit: number){
+  findNextPageLessonsKey(courseUrl: string, from: Lesson, limit: number) {
     return this.findCourseByUrl(courseUrl)
       .filter(c => !!c)
       .switchMap((c) => this.db.list(`lessonsPerCourse/${c.$key}`, {
@@ -115,15 +115,15 @@ export class CourseService {
       .map(Lesson.fromJsonList);
   }
 
-  findLessonByUrl(url){
-     return this.db.list('lessons', {
+  findLessonByUrl(url) {
+    console.log("url", url)
+    return this.db.list('lessons', {
       query: {
         orderByChild: 'url',
         equalTo: url
       }
     })
-    .filter(r => !!r)
-    .map(res => res[0]);
+      .map(res => res[0]);
   }
 
   addCourse(course) {
@@ -150,6 +150,25 @@ export class CourseService {
       );
   }
 
+  updateLesson(lesson, update) {
+   return this.lessons$.update(lesson, update);
+/*
+    const lessonToSave = Object.assign({}, update);
+    delete(lessonToSave.$key);
+    let dataToSave = {};
+    dataToSave[`lessons/${lesson.$key}`] = lessonToSave;
+    const subject = new Subject();
+    return this.rootDb.update(dataToSave)
+      .then((val) => {
+        subject.next(val);
+        subject.complete();
+      }, (err) => {
+        subject.error(err);
+        subject.complete();
+      });
+    return subject.asObservable();*/
+  }
+
   getLastCourse() {
     this.courses$
       .subscribe(
@@ -159,7 +178,7 @@ export class CourseService {
       )
   }
 
-  createNewLesson(courseId: string, lesson: Lesson): Observable<any>{
+  createNewLesson(courseId: string, lesson: Lesson): Observable<any> {
     const lessonToSave = Object.assign({}, lesson, {courseId});
 
     // Generate a new key under 'lessons' collection, db won't change currently
@@ -172,7 +191,7 @@ export class CourseService {
 
     const subject = new Subject();
     this.rootDb.update(dataToSave)
-      .then( (val) => {
+      .then((val) => {
         subject.next(val);
         subject.complete();
       }, (err) => {

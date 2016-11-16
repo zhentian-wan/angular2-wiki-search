@@ -12,6 +12,7 @@ export class LessonDataResolver implements Resolve {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
     const url = route.params['id'];
+    console.log("resolve id", url);
     return this.lessonService.findLessonByUrl(url).first();
   }
 
