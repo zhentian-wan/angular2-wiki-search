@@ -16,3 +16,17 @@
        [style.bottom]="position.y + 'px'"
   ></div>
 </section>
+
+<template #foo let-name="name" let-skills="skills">
+  <h4>{{name}}</h4>
+  <ul>
+    <li *ngFor="let s of skills">{{s}}</li>
+  </ul>
+</template>
+
+<div [ngTemplateOutlet]="foo"
+          [ngOutletContext]="msg1">
+</div>
+<div [ngTemplateOutlet]="foo"
+          [ngOutletContext]="msg2">
+</div>

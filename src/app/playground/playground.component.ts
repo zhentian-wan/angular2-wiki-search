@@ -23,7 +23,18 @@ export class PlaygroundComponent implements OnInit, OnDestroy {
   ballSub$: Subscription;
   dadSub$: Subscription;
 
+  msg1;
+  msg2;
+
   constructor() {
+    this.msg1 = {
+      name: "Zhentian",
+      skills: ["JS", "Angular"]
+    };
+    this.msg2 = {
+      name: "Wan",
+      skills: ["JSX", "React"]
+    };
   }
 
   ngOnDestroy() {
@@ -82,7 +93,7 @@ export class PlaygroundComponent implements OnInit, OnDestroy {
         .switchMap(e => mousedown$)
         .switchMap(e => mousemove$.takeUntil(mouseup$))
         .subscribe(
-          (p:MouseEvent) => {
+          (p: MouseEvent) => {
             this.position = {
               x: p.clientX - 50,
               y: p.clientY - 50
