@@ -1,0 +1,23 @@
+<form autocomplete="off" novalidate class="login-form" [formGroup]="form">
+
+  <fieldset>
+    <legend>Login</legend>
+    <div class="form-field">
+      <label>Email:</label>
+      <input name="email" formControlName="email">
+    </div>
+    <div class="form-field">
+      <label>Password:</label>
+      <input name="password" formControlName="password" type="password">
+    </div>
+  </fieldset>
+
+  <button (click)="login()">Login</button>
+
+</form>
+
+<section class="signup">
+  <button md-button (click)="signInWithGoogle()">Google</button>
+  <button md-button (click)="signInWithTwitter()">Twitter</button>
+  <button md-button (click)="signInWithGithub()">Github</button>
+</section>

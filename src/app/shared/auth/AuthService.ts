@@ -1,6 +1,7 @@
 
-import {AuthProviders, FirebaseAuthState, FirebaseAuth} from "angularfire2";
+import {AuthProviders, FirebaseAuthState, FirebaseAuth, AuthMethods} from "angularfire2";
 import {Injectable} from "@angular/core";
+import {Subject} from "rxjs";
 
 @Injectable()
 export class AuthService {
@@ -21,8 +22,32 @@ export class AuthService {
     return this.authenticated ? this.authState.uid : '';
   }
 
+  login(email, password) {
+
+    return this.fromFirebaseAuthPromise(this.auth$.login({
+      email, password
+    },{
+      method: AuthMethods.Password,
+      provider: AuthProviders.Password
+    }));
+  }
+
+  fromFirebaseAuthPromise(promise) {
+    const subject = new Subject<any>();
+
+    promise.then((res) => {
+      subject.next(res);
+      subject.complete();
+    }, err => {
+      subject.error(err);
+      subject.complete();
+    });
+
+    return subject.asObservable();
+  }
+
   signIn(provider: number): firebase.Promise<FirebaseAuthState> {
-    return this.auth$.login({provider})
+    return this.auth$.login({provider, method: AuthMethods.Popup})
       .catch(error => console.log('ERROR @ AuthService#signIn() :', error));
   }
 
