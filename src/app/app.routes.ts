@@ -2,13 +2,14 @@ import {RouterModule, PreloadAllModules} from "@angular/router";
 import {NotFoundComponent} from "./shared-components/not-found/not-found.component";
 import {PreloadSelectedModuledsList} from "./shared/preload-router-list";
 import {LoginComponent} from "./login/login.component";
+import {SignupComponent} from "./signup/signup.component";
 
 const indexRoute = {path: '', redirectTo: 'login', pathMatch: 'full'};
 const fallbackRoute = {path: '**', component: NotFoundComponent};
 const routes = [
   {path: 'legacy-url', redirectTo: '/home', pathMatch: 'prefix'},
   {path: 'login', component: LoginComponent, name: 'Login'},
-  {path: 'signup', loadChildren: 'app/signup/signup.module', name: 'Signup'},
+  {path: 'signup', component: SignupComponent, name: 'Signup'},
   {path: 'home', loadChildren: 'app/home/home.module', name: 'Home'},
   {path: 'heros', loadChildren: 'app/heros/heros.module', name: 'Heros', data: {preload: true}},
   {path: 'contact', loadChildren: 'app/contact/contact.module', name: 'Contact', data: {preload: true}},

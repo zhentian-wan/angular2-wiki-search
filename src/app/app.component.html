@@ -14,6 +14,7 @@
       </md-list-item>
       <md-list-item>
         <a
+          *ngIf="authInfo$.isLoggedIn()"
           [routerLink]="['/heros', {outlets: {'wiki': null}}]"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{exact: true}"
@@ -54,6 +55,12 @@
           [routerLink]="['/contact']"
           routerLinkActive="active"
         >Contact</a>
+      </md-list-item>
+      <md-list-item>
+        <a
+          *ngIf="authInfo$.isLoggedIn()"
+          (click)="logout()"
+        >Log out</a>
       </md-list-item>
     </md-list>
   </md-sidenav>

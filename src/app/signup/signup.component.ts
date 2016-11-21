@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../shared";
 import {Router} from "@angular/router";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-signup',
@@ -9,31 +10,32 @@ import {Router} from "@angular/router";
 })
 export class SignupComponent implements OnInit {
 
-  constructor(private auth: AuthService, private router: Router) {
+  signupForm: FormGroup;
+  constructor(private auth: AuthService, private fb: FormBuilder,
+  private router: Router
+  ){
 
   }
 
   ngOnInit() {
+    this.signupForm = this.fb.group({
+      email: ['', Validators.required],
+      pwd: ['', Validators.required],
+      pwd2: ['', Validators.required]
+    });
   }
 
-  signInWithGithub(){
-    this.auth.signInWithGithub()
-      .then(this.postSignIn.bind(this))
+  signup(){
+    const value = this.signupForm.value;
+    this.auth.signUp(value.email, value.pwd)
+      .subscribe(() => {
+        this.router.navigate(['/home'])
+      });
   }
 
-  signInWithTwitter(){
-    this.auth.signInWithTwitter()
-      .then(this.postSignIn.bind(this))
-  }
-
-  signInWithGoogle(){
-    this.auth.signInWithGoogle()
-      .then(this.postSignIn.bind(this))
-  }
-
-  postSignIn() {
-    console.log("Auth id: ", this.auth.id);
-    this.router.navigate(['/home']);
+  isPasswordMatch(){
+    const value = this.signupForm.value;
+    return value.pwd && value.pwd2 && value.pwd === value.pwd2;
   }
 
 }

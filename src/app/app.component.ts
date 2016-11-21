@@ -8,7 +8,16 @@ import {AuthService} from "./shared/auth/AuthService";
 })
 export class AppComponent {
   title = 'app works!';
+  authInfo$;
   constructor(private auth: AuthService){
+      this.auth.authInfo$.subscribe(
+        res => {
+          this.authInfo$ = res;
+        }
+      )
+  }
 
+  logout(){
+    this.auth.logout();
   }
 }

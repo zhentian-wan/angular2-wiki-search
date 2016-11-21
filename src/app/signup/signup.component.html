@@ -1,5 +1,16 @@
-<section class="signup">
-  <button md-button (click)="signInWithGoogle()">Google</button>
-  <button md-button (click)="signInWithTwitter()">Twitter</button>
-  <button md-button (click)="signInWithGithub()">Github</button>
-</section>
+<form novalidate autocomplete="off" [formGroup]="signupForm">
+  <div>
+    <label>email:</label>
+    <input type="text" formControlName="email">
+  </div>
+  <div>
+    <label>password:</label>
+    <input type="password" formControlName="pwd">
+  </div>
+  <div>
+    <label>confrim password:</label>
+    <input type="password" formControlName="pwd2">
+  </div>
+
+  <button md-button color="primary" (click)="signup()" [disabled]="!isPasswordMatch()">Sign up</button>
+</form>

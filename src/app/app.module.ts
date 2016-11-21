@@ -16,6 +16,7 @@ import {PreloadSelectedModuledsList} from "./shared/preload-router-list";
 import {MaterialModule} from "@angular/material";
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import {SignupComponent} from "./signup/signup.component";
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { RegisterComponent } from './register/register.component';
     AppComponent,
     NotFoundComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    SignupComponent
   ],
   imports: [
     appRoutes,

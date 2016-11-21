@@ -1,12 +1,16 @@
 
 import {AuthProviders, FirebaseAuthState, FirebaseAuth, AuthMethods} from "angularfire2";
 import {Injectable} from "@angular/core";
-import {Subject} from "rxjs";
+import {Subject, BehaviorSubject} from "rxjs";
+import {AuthInfo} from "./AuthInfo";
 
 @Injectable()
 export class AuthService {
 
+  static UNKNOW_USER = new AuthInfo(null);
+
   private authState: FirebaseAuthState = null;
+  public authInfo$: BehaviorSubject<AuthInfo> = new BehaviorSubject<AuthInfo>(AuthService.UNKNOW_USER);
 
   constructor(public auth$: FirebaseAuth) {
     auth$.subscribe((state: FirebaseAuthState) => {
@@ -22,6 +26,12 @@ export class AuthService {
     return this.authenticated ? this.authState.uid : '';
   }
 
+  signUp(email, password){
+    return this.fromFirebaseAuthPromise(this.auth$.createUser(
+      {email, password}
+    ));
+  }
+
   login(email, password) {
 
     return this.fromFirebaseAuthPromise(this.auth$.login({
@@ -32,13 +42,22 @@ export class AuthService {
     }));
   }
 
+  logout(){
+    this.auth$.logout();
+    this.authInfo$.next(AuthService.UNKNOW_USER);
+  }
+
   fromFirebaseAuthPromise(promise) {
     const subject = new Subject<any>();
 
     promise.then((res) => {
+      const uid = this.authState.uid;
+      const authInfo = new AuthInfo(uid);
+      this.authInfo$.next(authInfo);
       subject.next(res);
       subject.complete();
     }, err => {
+      this.authInfo$.error(err);
       subject.error(err);
       subject.complete();
     });
