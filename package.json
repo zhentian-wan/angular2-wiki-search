@@ -9,6 +9,7 @@
     "test": "ng test",
     "pree2e": "webdriver-manager update",
     "e2e": "protractor",
+    "batch-server": "./node_modules/.bin/ts-node ./batch-server.ts",
     "db": "./node_modules/.bin/ts-node ./popluate-db.ts"
   },
   "private": true,
@@ -32,6 +33,7 @@
     "rxjs": "5.0.0-beta.12",
     "ts-helpers": "^1.1.1",
     "ts-node": "^1.4.3",
+    "ts-promise": "^0.3.4",
     "zone.js": "^0.6.23"
   },
   "devDependencies": {

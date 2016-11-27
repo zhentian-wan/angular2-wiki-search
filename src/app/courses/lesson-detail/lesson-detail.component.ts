@@ -3,6 +3,7 @@ import {ActivatedRoute} from "@angular/router";
 import {Course} from "../courses";
 import {CourseService} from "../course.service";
 import {Observable} from "rxjs";
+import {Lesson} from "../lessons/lessons";
 
 @Component({
   selector: 'app-lesson-detail',
@@ -16,7 +17,7 @@ export class LessonDetailComponent implements OnInit {
 
   }
 
-  lesson: Observable<any>;
+  lesson: Observable<Lesson>;
   ngOnInit() {
     /*this.route.params
       .map(p => p['id'])
@@ -34,6 +35,15 @@ export class LessonDetailComponent implements OnInit {
           this.lesson = res['lesson'];
         }
       )
+  }
+
+  requestLessonDeletion() {
+    this.courseService.deleteLEssonById(
+      this.lesson.$key,
+      this.lesson.courseId
+    )
+      .then(() => alert("lesson delete successfully"))
+      .catch((err) => console.error(err));
   }
 
 }

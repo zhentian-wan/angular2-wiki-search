@@ -201,4 +201,11 @@ export class CourseService {
     return subject.asObservable();
   }
 
+  deleteLEssonById(lessonId: string, courseId) {
+    return this.rootDb.child('queue/tasks')
+      .push({
+        lessonId,
+        courseId
+      })
+  }
 }

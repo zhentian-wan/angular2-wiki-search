@@ -9,13 +9,11 @@ import {MdToolbarModule} from "@angular2-material/toolbar";
 import {MdInputModule} from "@angular2-material/input";
 import {MdButtonModule} from "@angular2-material/button";
 import homeRoutes from './home.routes';
+import {MaterialModule} from "@angular/material";
 @NgModule({
   imports: [
     CommonModule,
-    MdButtonModule.forRoot(),
-    MdInputModule.forRoot(),
-    MdToolbarModule.forRoot(),
-    MdListModule.forRoot(),
+    MaterialModule,
     homeRoutes
   ],
   declarations: [HomeComponent, SearchBarComponent, ResultListComponent],

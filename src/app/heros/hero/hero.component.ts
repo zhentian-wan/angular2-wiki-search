@@ -55,8 +55,7 @@ export class HeroComponent implements OnInit, OnDestroy {
         this.editing = false;
         this.heroId = id;
       });
-    this.hero = this.route.data
-      .map((d:any)=> d['hero']);
+    this.hero = <Observable<Hero>>this.route.data.pluck('hero');
 
 
    /* // since herocomponent get init everytime, it would be better to use snapshot for proferemence
