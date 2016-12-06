@@ -25,6 +25,6 @@ const routes = [
 
 export default RouterModule.forRoot(routes, {
   useHash: true,
-  preloadingStrategy: PreloadSelectedModuledsList
-  //preloadingStrategy: PreloadAllModules
+  //preloadingStrategy: PreloadSelectedModuledsList
+  preloadingStrategy: PreloadAllModules
 });

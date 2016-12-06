@@ -20,7 +20,7 @@ export interface Hero{
 })
 export class HeroComponent implements OnInit, OnDestroy {
 
-  @ViewChild('inpRef') input;
+  @ViewChild('inpRef');
 
   heroId: number;
   hero: Observable<Hero>;

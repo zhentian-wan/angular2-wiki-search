@@ -54,6 +54,20 @@ export class PlaygroundComponent implements OnInit, OnDestroy {
     const leftBtn = this.left.nativeElement;
     const upBtn = this.up.nativeElement;
     const downBtn = this.down.nativeElement;
+
+    const leftArrow$ = Observable.fromEvent(document, 'keydown')
+      .filter(event => event.key === 'ArrowLeft')
+      .mapTo(position => this.increment(position, 'x', 10));
+    const rightArrow$ = Observable.fromEvent(document, 'keydown')
+      .filter(event => event.key === 'ArrowRight')
+      .mapTo(position => this.decrement(position, 'x', 10));
+    const upArrow$ = Observable.fromEvent(document, 'keydown')
+      .filter(event => event.key === 'ArrowUp')
+      .mapTo(position => this.increment(position, 'y', 10));
+    const downArrow$ = Observable.fromEvent(document, 'keydown')
+      .filter(event => event.key === 'ArrowDown')
+      .mapTo(position => this.decrement(position, 'y', 10));
+
     const rightClick$ = Observable.fromEvent(rightBtn, 'click')
       .map(event => ({x: 10, y: 0}));
     const leftClick$ = Observable.fromEvent(leftBtn, 'click')
@@ -78,6 +92,16 @@ export class PlaygroundComponent implements OnInit, OnDestroy {
       })
       .subscribe(
         p => this.position = p
+      );
+
+    Observable.merge(leftArrow$, rightArrow$, downArrow$, upArrow$)
+      .startWith({
+        x: 200,
+        y: 200
+      })
+      .scan((acc, curr) => curr(acc))
+      .subscribe(
+        p => this.position = p
       )
   }
 
@@ -100,6 +124,14 @@ export class PlaygroundComponent implements OnInit, OnDestroy {
             }
           }
         );
+  }
+
+  increment(obj, prop, value) {
+    return Object.assign({}, obj, {[prop]: obj[prop] + value});
+  }
+
+  decrement(obj, prop, value) {
+    return Object.assign({}, obj, {[prop]: obj[prop] - value});
   }
 
   animate() {
